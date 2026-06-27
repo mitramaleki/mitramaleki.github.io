@@ -1,7 +1,6 @@
 import React, { useRef, useEffect } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { OrbitControls, Stars, FXAA } from '@react-three/drei';
-import StarsComponent from './Stars'; // our custom stars
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import StarsComponent from './Stars';
 import Sky from './Sky';
 import Ground from './Ground';
 import Clouds from './Clouds';
@@ -29,7 +28,7 @@ function WrapClickable({ Component, key, onObjectClick, ...props }) {
   };
 
   return (
-    <group onClick={handleClick} cursor="pointer">
+    <group onClick={handleClick} style={{ cursor: 'pointer' }}>
       <Component {...props} />
     </group>
   );
@@ -38,10 +37,6 @@ function WrapClickable({ Component, key, onObjectClick, ...props }) {
 function MainScene({ onObjectClick }) {
   const { size } = useThree();
   const cameraRef = useRef();
-
-  // We'll control the camera position based on scroll
-  // For now, we'll keep the camera static and let the user orbit with controls
-  // But we want scroll-based movement. We'll implement a simple scroll-driven camera.
 
   // Scroll handling
   useEffect(() => {
@@ -57,7 +52,10 @@ function MainScene({ onObjectClick }) {
   useFrame((state, delta) => {
     // Map scrollY to a camera position
     // We'll define a few key points for the camera path
-    const scrollProgress = Math.min(Math.max(window.scrollY / (document.body.scrollHeight - window.innerHeight), 0), 1);
+    const scrollProgress = Math.min(
+      Math.max(window.scrollY / (document.body.scrollHeight - window.innerHeight), 0),
+      1
+    );
 
     // Define key points: [position, target] for different scroll positions
     const points = [
@@ -95,13 +93,13 @@ function MainScene({ onObjectClick }) {
     );
 
     // Smoothly move the camera
-    cameraRef.current.position.lerp(
-      new THREE.Vector3(...currentPosition),
-      delta * 5
-    );
-    cameraRef.current.lookAt(
-      new THREE.Vector3(...currentTarget)
-    );
+    if (cameraRef.current) {
+      cameraRef.current.position.lerp(
+        new THREE.Vector3(...currentPosition),
+        delta * 5
+      );
+      cameraRef.current.lookAt(new THREE.Vector3(...currentTarget));
+    }
   });
 
   return (
@@ -113,8 +111,12 @@ function MainScene({ onObjectClick }) {
         castShadow
       >
         <shadowCamera
-          left={-50} bottom=-50 near=0.1 far=500
-          right={50} top=50
+          left={-50}
+          bottom={-50}
+          near={0.1}
+          far={500}
+          right={50}
+          top={50}
         />
       </directionalLight>
 
@@ -141,9 +143,6 @@ function MainScene({ onObjectClick }) {
         <WrapClickable Component={Lantern} key="lantern" onObjectClick={onObjectClick} position={[0, 1.5, 10]} />
         <WrapClickable Component={Girl} key="girl" onObjectClick={onObjectClick} position={[0, 0, 0]} />
       </group>
-
-      {/* FXAA for anti-aliasing */}
-      <FXAA />
     </>
   );
 }
