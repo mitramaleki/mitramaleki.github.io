@@ -4,200 +4,394 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mitra Maleki - Astrophysics & Cosmology</title>
-
-  <meta name="description" content="MSc Astrophysics student at LMU Munich working on cosmology, early universe physics, and transient astrophysics.">
-
+  <meta name="description" content="MSc Astrophysics student at LMU Munich. Research in cosmology, transient astrophysics, gamma-ray bursts, and early universe physics.">
   <link rel="stylesheet" href="style.css">
+  
+  <style>
+    /* Image sizing - small and clean */
+    .hero-image img {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 20px;
+      border: 3px solid rgba(255,255,255,0.2);
+      box-shadow: 0 0 30px rgba(100,150,255,0.3);
+    }
+    
+    .dog-image img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 12px;
+      margin-top: 20px;
+      border: 2px solid rgba(255,255,255,0.1);
+    }
+    
+    .section-content {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    
+    /* Publication styling */
+    .publication-list {
+      list-style: none;
+      padding: 0;
+    }
+    
+    .publication-list li {
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    
+    .publication-list li:last-child {
+      border-bottom: none;
+    }
+    
+    .publication-list a {
+      color: #88bbff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    
+    .publication-list a:hover {
+      color: #aaddff;
+      text-decoration: underline;
+    }
+    
+    .gcn-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 10px;
+      padding: 0;
+      list-style: none;
+    }
+    
+    .gcn-list li {
+      background: rgba(255,255,255,0.05);
+      padding: 8px 12px;
+      border-radius: 6px;
+      text-align: center;
+    }
+    
+    .gcn-list a {
+      color: #88bbff;
+      text-decoration: none;
+      font-size: 0.95em;
+    }
+    
+    .gcn-list a:hover {
+      color: #aaddff;
+      text-decoration: underline;
+    }
+    
+    .timeline-item {
+      margin-bottom: 30px;
+      padding-left: 20px;
+      border-left: 2px solid rgba(100,150,255,0.3);
+    }
+    
+    .timeline-item h3 {
+      margin-bottom: 5px;
+      color: #aaddff;
+    }
+    
+    .period {
+      color: #8899bb;
+      font-size: 0.9em;
+      margin-top: 0;
+    }
+    
+    .skill-tag {
+      display: inline-block;
+      background: rgba(100,150,255,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      margin: 4px 6px 4px 0;
+      font-size: 0.9em;
+      border: 1px solid rgba(100,150,255,0.2);
+    }
+  </style>
 </head>
 
 <body>
-
-  <!-- Starfield -->
   <canvas id="starfield"></canvas>
 
   <div class="content">
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section id="hero" class="section">
       <div class="section-content">
-
-        <!-- Main image -->
         <div class="hero-image">
           <img src="ChatGPT Image Jun 27, 2026, 08_30_17 PM.png" alt="Mitra Maleki">
         </div>
-
         <h1>Mitra Maleki</h1>
-        <p class="title">MSc Astrophysics Student • Cosmology Researcher</p>
-        <p class="subtitle">Exploring the universe through theory, computation, and observation</p>
-
+        <p class="title">MSc Astrophysics Student • LMU Munich</p>
+        <p class="subtitle">Cosmology • Transient Astrophysics • Early Universe Physics</p>
       </div>
     </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section">
+    <!-- ABOUT SECTION -->
+    <section class="section">
       <div class="section-content">
-
-        <h2>About My Research</h2>
-
+        <h2>About Me</h2>
         <p>
-          I am an MSc Astrophysics student at Ludwig Maximilian University of Munich (LMU),
-          working in cosmology, early universe physics, and transient astrophysics.
+          I am an MSc Astrophysics student at Ludwig Maximilian University of Munich (LMU), 
+          working on cosmology, early universe physics, and transient astrophysical phenomena. 
+          My research combines theoretical modeling, numerical simulations, and observational 
+          data analysis to study gamma-ray bursts, supernovae, and the evolution of cosmic structures.
         </p>
-
         <p>
-          My research focuses on gamma-ray bursts, supernovae, and other transient events,
-          combining theoretical models, numerical methods, and observational data.
+          I am actively involved in observational follow-up programs at Wendelstein Observatory 
+          and contribute to NASA GCN Circulars for transient astrophysical events.
         </p>
-
       </div>
     </section>
 
-    <!-- RESEARCH -->
-    <section id="research" class="section">
+    <!-- RESEARCH EXPERIENCE -->
+    <section class="section">
       <div class="section-content">
-
         <h2>Research Experience</h2>
-
+        
         <div class="timeline-item">
-          <h3>LMU Munich & Wendelstein Observatory</h3>
-          <p class="period">2025 – Present</p>
-          <p>
-            Photometry, image calibration, transient analysis, and follow-up observations of
-            gamma-ray bursts and supernovae. Contributing to NASA GCN Circulars.
-          </p>
+          <h3>Multi-Messenger Astrophysics Seminar — LMU Munich</h3>
+          <p class="period">2025–2026 • Supervisor: Prof. Daniel Gruen</p>
+          <p>Analyzed large astrophysical datasets using semi-automated workflows. Contributed to observational follow-up of transient astrophysical events. Worked with Wendelstein Observatory data products.</p>
         </div>
 
         <div class="timeline-item">
-          <h3>Cosmology Research (Sharif University of Technology)</h3>
-          <p class="period">2020 – 2024</p>
-          <p>
-            Studied inflation, early universe cosmology, and primordial black holes using analytical
-            and numerical methods.
-          </p>
+          <h3>Observational Astronomy — Wendelstein Observatory</h3>
+          <p class="period">2025–2026</p>
+          <p>Performed calibration, photometry, and image subtraction for transient events. Contributed to GRB follow-up analysis and time-domain studies. Results contributed to NASA GCN Circulars.</p>
         </div>
 
+        <div class="timeline-item">
+          <h3>Individual Study in Cosmology</h3>
+          <p class="period">Summer 2023 • Advisor: Dr. Hassan Firouzjahi</p>
+          <p>Studied cosmology using Baumann and Carroll with focus on analytical derivations. Participated in IPM seminars and research discussions.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Bachelor Project — Primordial Black Holes</h3>
+          <p class="period">2023–2024 • Supervisor: Dr. Ali Akbar Abolhasani</p>
+          <p>Investigated formation mechanisms and observational constraints of primordial black holes. Applied analytical and computational methods in early-universe cosmology.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Numerical Relativity Collaboration Program</h3>
+          <p class="period">2025</p>
+          <p>Studied numerical solutions of Einstein equations for gravitational wave modeling.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TECHNICAL SKILLS -->
+    <section class="section">
+      <div class="section-content">
+        <h2>Technical Skills</h2>
+        <p>
+          <span class="skill-tag">Python (NumPy, pandas, matplotlib)</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Linux/command line</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">Wolfram Mathematica</span>
+          <span class="skill-tag">LaTeX</span>
+          <span class="skill-tag">JSON</span>
+          <span class="skill-tag">HTML/CSS</span>
+          <span class="skill-tag">JavaScript</span>
+        </p>
+        <p><strong>Relevant Coursework:</strong> Numerical Methods, Scientific Computing, Statistics & Probability, Computational Physics, Numerical Relativity and Cosmology.</p>
       </div>
     </section>
 
     <!-- PUBLICATIONS -->
-    <section id="publications" class="section">
+    <section class="section">
       <div class="section-content">
-
         <h2>Publications & Research Outputs</h2>
 
-        <p>
-          Co-author of arXiv preprints and contributor to NASA GCN Circulars in transient astrophysics.
-        </p>
-
-        <ul>
-          <li>GRB 260310A / SN 2026fgk – arXiv preprint</li>
-          <li>Multiple GCN Circular contributions (gamma-ray bursts & transients)</li>
+        <h3>arXiv Preprints</h3>
+        <ul class="publication-list">
+          <li>
+            <a href="https://arxiv.org/abs/2605.18973" target="_blank">
+              <strong>GRB 260310A/SN 2026fgk: Photometric and Spectroscopic Evolution of a Nearby GRB-Supernova and an Exceptionally Bright Afterglow at z = 0.153</strong>
+            </a>
+            <br>B. O'Connor, M. Busmann, X.J. Hall, K. Taguchi, M. Tanaka, D. Gruen, <strong>M. Maleki</strong>, et al.
+          </li>
+          <li>
+            <a href="https://arxiv.org/abs/2606.09992" target="_blank">
+              <strong>EP260321a/SN 2026gzf: The Faintest Shock Breakout Associated with a Broad-Lined Supernova</strong>
+            </a>
+            <br>B. O'Connor, X.J. Hall, M. Busmann, D. Gruen, A. Floris, T. Cabrera, Z. Zhu, <strong>M. Maleki</strong>, et al.
+          </li>
         </ul>
 
+        <h3>NASA GCN Circulars</h3>
+        <ul class="gcn-list">
+          <li><a href="https://gcn.nasa.gov/circulars/44061" target="_blank">GCN 44061</a></li>
+          <li><a href="https://gcn.nasa.gov/circulars/43345" target="_blank">GCN 43345</a></li>
+          <li><a href="https://gcn.nasa.gov/circulars/43344" target="_blank">GCN 43344</a></li>
+          <li><a href="https://gcn.nasa.gov/circulars/43233" target="_blank">GCN 43233</a></li>
+          <li><a href="https://gcn.nasa.gov/circulars/43232" target="_blank">GCN 43232</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- PROFESSIONAL EXPERIENCE -->
+    <section class="section">
+      <div class="section-content">
+        <h2>Professional Experience</h2>
+        
+        <div class="timeline-item">
+          <h3>Data Engineering & AI Automation Engineer — Experteer GmbH</h3>
+          <p class="period">2026–Present</p>
+          <p>Built data validation and automation workflows for structured datasets. Designed AI-assisted process automation using n8n. Developed systems for operational data handling and reporting.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Marketing Manager — Accutek Packaging Equipment Company, Inc.</h3>
+          <p class="period">2022–2025</p>
+          <p>Managed digital marketing campaigns and performance analytics. Applied data-driven optimization using KPIs and A/B testing.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- WORKSHOPS & TEACHING -->
+    <section class="section">
+      <div class="section-content">
+        <h2>Workshops & Teaching</h2>
+        
+        <div class="timeline-item">
+          <h3>IPM Cosmology Workshop</h3>
+          <p class="period">2023</p>
+          <p>Theoretical and observational cosmology training program.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Giambiagi Winter School on Cosmology</h3>
+          <p class="period">2023</p>
+          <p>Topics included CMB, dark matter, gravitational waves, and structure formation.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Astrophysical Flows Workshop (Pencil Code)</h3>
+          <p class="period">2025</p>
+          <p>Hydrodynamic simulations and astrophysical fluid modeling.</p>
+        </div>
+
+        <div class="timeline-item">
+          <h3>Teaching Assistant — Physics 3</h3>
+          <p class="period">2023 • Sharif University of Technology</p>
+          <p>Led problem-solving sessions and supported course instruction.</p>
+        </div>
       </div>
     </section>
 
     <!-- LIFE BEYOND RESEARCH -->
-    <section id="beyond" class="section">
+    <section class="section">
       <div class="section-content">
-
         <h2>Life Beyond Research</h2>
-
+        
         <p>
-          I have been obsessed with astrophysics and science since I was a kid.
-          I always wanted to become a scientist, like the ones I saw in cartoons such as
-          <i>Cloudy with a Chance of Meatballs</i>.
+          I have been obsessed with astrophysics and science since I was a kid. I always wanted to become a 
+          scientist like the ones I saw in cartoons such as <i>Cloudy with a Chance of Meatballs</i>. That 
+          curiosity never really left me, and it slowly became the path I followed into physics and cosmology.
         </p>
 
         <p>
-          Before university, a big part of my life was music and sports.
+          <strong>Music</strong> was my first passion. I started playing the violin as a child, later learned 
+          the viola, and performed in orchestras for several years. Rehearsals and concerts became a normal 
+          part of my life, and I loved the discipline of working together to create something larger than 
+          any individual musician could. Eventually, as university became more demanding, I made the difficult 
+          decision to leave orchestras behind and devote my time to studying physics. I still play occasionally, 
+          although now it's simply for myself.
         </p>
 
         <p>
-          I played violin as a child, later learned viola, and performed in orchestras for several years.
-          I still play sometimes for myself.
+          <strong>Sports</strong> came next. I started skating as a kid, then moved into inline hockey, 
+          and later ice hockey. I played as a defense player for my team, trained a lot, and competed in 
+          different national leagues. I won two bronze medals — one in inline hockey and one in ice hockey. 
+          I also became a skating and hockey coach, coaching beginners and kids. Watching my students gain 
+          confidence on the ice was just as rewarding as competing myself.
         </p>
 
         <p>
-          I also started skating as a kid, then moved into inline hockey and ice hockey.
-          I played as a defense player, competed in national leagues, and won two bronze medals.
+          Unfortunately, after a serious injury, I had to stop doing intensive sports. It wasn't an easy 
+          chapter to close, but it changed my life in a way where I had to slow down and focus more on 
+          other things like studying and research. The determination that once pushed me through long 
+          training sessions now finds its place in research, coding, and tackling difficult scientific problems.
         </p>
 
         <p>
-          Later I became a skating and hockey coach, and some of my students went on to international competitions.
+          <strong>Languages</strong> are another passion. I'm currently studying German, Turkish, and Arabic 
+          at the same time — not because it's the easiest thing to do, but because I enjoy challenging myself 
+          and discovering new ways of understanding people and cultures. Sometimes I wonder whether trying 
+          to learn three languages at once is a good idea, but I'm still running the experiment.
         </p>
 
         <p>
-          After a serious injury, I had to stop competitive sports, which changed my direction and brought me closer to physics and research.
+          And when I'm not studying or working, I enjoy hiking with my dog.
         </p>
-
-        <p>
-          Right now, I like learning multiple languages at the same time,
-          and I also enjoy hiking with my dog.
-        </p>
-
       </div>
     </section>
 
-    <!-- DOG PAGE -->
-    <section id="dog" class="section">
+    <!-- DOG SECTION -->
+    <section class="section">
       <div class="section-content">
-
         <h2>My Dog</h2>
-
+        
         <p>
-          My dog came into my life when I needed him the most. Since then, he has been with me through every stage of my life.
+          My dog came into my life when I needed him the most. Since then, he has been with me through 
+          almost every stage of my life.
         </p>
 
         <p>
-          We went through everything together — from university entrance exams in Iran,
-          to getting accepted into one of the best universities, and through my bachelor’s degree.
+          We went through everything together — from preparing for college entrance exams in Iran, getting 
+          accepted into one of the best universities there, and studying through my bachelor's degree. 
+          He was there during long study days, stressful moments, and all the changes that came with 
+          university life.
         </p>
 
         <p>
-          He even moved with me to Germany so I could continue my master’s degree.
+          Later, he even moved with me to Germany so I could continue my master's degree. Moving countries 
+          was a big change for both of us, but having him there made everything feel more stable and familiar.
         </p>
 
         <p>
-          He is my biggest academic partner. He doesn’t understand physics or cosmology,
-          but he has been there through every step of it.
+          He has been my biggest academic partner in his own way. He doesn't understand cosmology or physics, 
+          but he has been present through all of it — every paper, every deadline, every milestone.
         </p>
 
         <p>
-          He is my biggest motivation, and I love him very much. I want to make him proud one day,
-          so that when he meets other dogs at the park and they are all sniffing around,
-          he can somehow tell them that my mama is a scientist.
+          He is my biggest motivation, and I love him very much. I want to make him proud one day, so that 
+          when he meets other dogs at the park and they are all sniffing around, he can somehow tell them 
+          that my mama is a scientist.
         </p>
 
-        <!-- DOG IMAGE -->
         <div class="dog-image">
           <img src="5911438853183049934.jpg" alt="My dog">
         </div>
-
       </div>
     </section>
 
     <!-- CONTACT -->
-    <section id="contact" class="section">
+    <section class="section">
       <div class="section-content">
-
         <h2>Contact</h2>
-
-        <p>Email: mitra.maleki@campus.lmu.de</p>
-
+        <p>Email: <a href="mailto:mitra.maleki@campus.lmu.de" style="color:#88bbff;">mitra.maleki@campus.lmu.de</a></p>
         <p>
-          <a href="https://www.linkedin.com">LinkedIn</a> |
-          <a href="https://scholar.google.com">Google Scholar</a> |
-          <a href="https://github.com">GitHub</a> |
-          <a href="https://www.researchgate.net/profile/Mitra-Maleki">ResearchGate</a>
+          <a href="https://www.linkedin.com/in/mitramaleki" style="color:#88bbff;">LinkedIn</a> • 
+          <a href="https://scholar.google.com" style="color:#88bbff;">Google Scholar</a> • 
+          <a href="https://github.com/mitramaleki" style="color:#88bbff;">GitHub</a> • 
+          <a href="https://www.researchgate.net/profile/Mitra-Maleki" style="color:#88bbff;">ResearchGate</a>
         </p>
-
+        <p style="margin-top:20px; font-size:0.9em; color:#8899bb;">
+          <em>Languages:</em> English (C1), German (A2), Farsi (Native)
+        </p>
       </div>
     </section>
 
   </div>
 
   <script src="script.js"></script>
-
 </body>
 </html>
