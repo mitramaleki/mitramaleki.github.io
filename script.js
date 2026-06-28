@@ -82,18 +82,14 @@ function initStarfield() {
       const scale = 2000 / (2000 - s.z);
       const screenX = s.x + (s.x - canvas.width / 2) * (scrollProgress * 0.3);
       const screenY = s.y + (s.y - canvas.height / 2) * (scrollProgress * 0.3);
-      const screenR = s.radius * scale;
 
-      if (screenR > 0 &&
-          screenX > -100 && screenX < canvas.width + 100 &&
-          screenY > -100 && screenY < canvas.height + 100) {
+      if (screenX > -1 && screenX < canvas.width + 1 &&
+          screenY > -1 && screenY < canvas.height + 1) {
         const depthFactor = 1 - (s.z / 2000);
         const brightness = 0.6 + depthFactor * 0.4; // 0.6-1.0
-
-        ctx.beginPath();
-        ctx.arc(screenX, screenY, screenR, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${brightness})`;
-        ctx.fill();
+        // Draw a 1px dot (centered)
+        ctx.fillRect(screenX - 0.5, screenY - 0.5, 1, 1);
       }
     });
 
