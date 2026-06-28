@@ -21,7 +21,7 @@ function initStarfield() {
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       z: Math.random() * 2000, // depth
-      radius: Math.random() * 1.2 + 0.3,
+      radius: Math.random() * 0.8 + 0.2,
       baseSpeed: 0.015 + Math.random() * 0.025
     });
   }
@@ -94,14 +94,6 @@ function initStarfield() {
         ctx.arc(screenX, screenY, screenR, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(255,255,255,${brightness})`;
         ctx.fill();
-
-        if (screenR > 0.8) {
-          ctx.shadowColor = `rgba(255,255,255,0.${Math.round(brightness * 5)})`;
-          ctx.shadowBlur = screenR * 2;
-          ctx.fill();
-          ctx.shadowColor = 'transparent';
-          ctx.shadowBlur = 0;
-        }
       }
     });
 
