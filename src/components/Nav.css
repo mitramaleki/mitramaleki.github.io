@@ -1,0 +1,87 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 3rem;
+  transition: background 0.4s ease, padding 0.3s ease;
+}
+
+.nav--scrolled {
+  background: rgba(3, 3, 10, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 1rem 3rem;
+  border-bottom: 1px solid var(--color-glass-border);
+}
+
+.nav__logo {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  color: var(--color-starwhite);
+  opacity: 0.9;
+  transition: opacity 0.2s;
+}
+.nav__logo:hover { opacity: 1; }
+
+.nav__links {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav__links a {
+  font-size: 0.72rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--color-silver);
+  transition: color 0.2s;
+}
+.nav__links a:hover { color: var(--color-starwhite); }
+
+.nav__burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 4px;
+}
+.nav__burger span {
+  display: block;
+  width: 22px;
+  height: 1px;
+  background: var(--color-silver);
+  transition: transform 0.3s, opacity 0.3s;
+}
+.nav__burger--open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+.nav__burger--open span:nth-child(2) { opacity: 0; }
+.nav__burger--open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+@media (max-width: 768px) {
+  .nav { padding: 1.2rem 1.5rem; }
+  .nav--scrolled { padding: 0.9rem 1.5rem; }
+  .nav__burger { display: flex; }
+  .nav__links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(3, 3, 10, 0.96);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--color-glass-border);
+    padding: 1rem 0;
+  }
+  .nav__links--open { display: flex; }
+  .nav__links li { padding: 0.8rem 2rem; }
+  .nav__links a { font-size: 0.8rem; }
+}
