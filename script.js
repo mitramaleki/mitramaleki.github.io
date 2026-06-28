@@ -14,7 +14,7 @@ function initStarfield() {
   resize();
 
   // Stars
-  const starCount = 120;
+  const starCount = 300; // increased density
   const stars = [];
   for (let i = 0; i < starCount; i++) {
     stars.push({
@@ -22,7 +22,7 @@ function initStarfield() {
       y: Math.random() * canvas.height,
       z: Math.random() * 2000, // depth
       radius: Math.random() * 0.8 + 0.2,
-      baseSpeed: 0.015 + Math.random() * 0.025
+      baseSpeed: 0.03 + Math.random() * 0.07 // faster base speed
     });
   }
 
@@ -72,8 +72,8 @@ function initStarfield() {
 
     // Update stars
     stars.forEach(s => {
-      // base drift + scroll-based parallax
-      const speedFactor = 0.2 + scrollProgress * 0.8; // 0.2 when no scroll, up to 1.0 at bottom
+      // base drift + scroll-based parallax (faster)
+      const speedFactor = 0.5 + scrollProgress * 1.5; // 0.5 when no scroll, up to 2.0 at bottom
       s.z -= s.baseSpeed * 12 * speedFactor;
       if (s.z <= 0) {
         s.z = 2000 + Math.random() * 500;
@@ -82,8 +82,8 @@ function initStarfield() {
       }
 
       const scale = 2000 / (2000 - s.z);
-      const screenX = s.x + (s.x - canvas.width / 2) * (scrollProgress * 0.3);
-      const screenY = s.y + (s.y - canvas.height / 2) * (scrollProgress * 0.3);
+      const screenX = s.x + (s.x - canvas.width / 2) * (scrollProgress * 0.6); // increased parallax
+      const screenY = s.y + (s.y - canvas.height / 2) * (scrollProgress * 0.6);
 
       if (screenX > -1 && screenX < canvas.width + 1 &&
           screenY > -1 && screenY < canvas.height + 1) {
