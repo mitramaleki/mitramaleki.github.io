@@ -14,7 +14,7 @@ function initStarfield() {
   resize();
 
   // Stars
-  const starCount = 300; // increased density
+  const starCount = 500; // increased density
   const stars = [];
   for (let i = 0; i < starCount; i++) {
     stars.push({
@@ -22,7 +22,8 @@ function initStarfield() {
       y: Math.random() * canvas.height,
       z: Math.random() * 2000, // depth
       radius: Math.random() * 0.8 + 0.2,
-      baseSpeed: 0.03 + Math.random() * 0.07 // faster base speed
+      baseSpeed: 0.05 + Math.random() * 0.1, // faster base speed
+      phase: Math.random() * Math.PI * 2 // twinkle phase offset
     });
   }
 
@@ -30,7 +31,7 @@ function initStarfield() {
   const shootingStars = [];
   const maxShooting = 2;
   let lastSpawn = 0;
-  const spawnInterval = 7000; // ms
+  const spawnInterval = 5000; // ms, a bit more frequent
 
   function spawnShooting() {
     if (shootingStars.length >= maxShooting) return;
@@ -66,14 +67,13 @@ function initStarfield() {
     const scrollY = window.scrollY;
     const maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
     const scrollProgress = Math.min(1, scrollY / maxScroll); // clamp 0-1
-    const moveOffset = scrollProgress * 80; // amount of movement
 
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Update stars
     stars.forEach(s => {
       // base drift + scroll-based parallax (faster)
-      const speedFactor = 0.5 + scrollProgress * 1.5; // 0.5 when no scroll, up to 2.0 at bottom
+      const speedFactor = 0.8 + scrollProgress * 1.2; // 0.8 when no scroll, up to 2.0 at bottom
       s.z -= s.baseSpeed * 12 * speedFactor;
       if (s.z <= 0) {
         s.z = 2000 + Math.random() * 500;
@@ -82,16 +82,19 @@ function initStarfield() {
       }
 
       const scale = 2000 / (2000 - s.z);
-      const screenX = s.x + (s.x - canvas.width / 2) * (scrollProgress * 0.6); // increased parallax
-      const screenY = s.y + (s.y - canvas.height / 2) * (scrollProgress * 0.6);
+      const screenX = s.x + (s.x - canvas.width / 2) * (scrollProgress * 0.8); // increased parallax
+      const screenY = s.y + (s.y - canvas.height / 2) * (scrollProgress * 0.8);
 
       if (screenX > -1 && screenX < canvas.width + 1 &&
           screenY > -1 && screenY < canvas.height + 1) {
         const depthFactor = 1 - (s.z / 2000);
-        const baseBrightness = 0.6 + depthFactor * 0.4; // 0.6-1.0
-        // twinkle effect
-        const twinkle = Math.sin(now * 0.003 + s.x * 0.01 + s.y * 0.01) * 0.1;
-        const brightness = Math.min(1, Math.max(0, baseBrightness + twinkle));
+        // brightness range: 0.2 (far) to 1.0 (near)
+        const baseBrightness = 0.2 + depthFactor * 0.8;
+        // twinkle effect with per-star phase
+        const twinkle = Math.sin(now * 0.004 + s.phase) * 0.2;
+        let brightness = baseBrightness + twinkle;
+        if (brightness < 0.05) brightness = 0.05; // ensure minimum visibility
+        if (brightness > 1) brightness = 1;
         ctx.fillStyle = `rgba(255,255,255,${brightness})`;
         // Draw a 1px dot (centered)
         ctx.fillRect(screenX - 0.5, screenY - 0.5, 1, 1);
@@ -99,7 +102,7 @@ function initStarfield() {
     });
 
     // Shooting stars
-    if (now - lastSpawn > spawnInterval && Math.random() < 0.3) {
+    if (now - lastSpawn > spawnInterval && Math.random() < 0.4) {
       spawnShooting();
       lastSpawn = now;
     }
