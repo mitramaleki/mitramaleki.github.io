@@ -1,0 +1,155 @@
+# Dependencies
+node_modules/
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
+
+# Build outputs
+/dist/
+/build/
+/_out/
+
+# Environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Misc
+.cache
+.coverage
+.nyc_output
+
+# Frameworks and tools
+.next/
+nuxt/
+.vitepress/
+.vuepress/
+.svelte-kit/
+.angular/
+.out/
+.cache/
+.tmp/
+.temp/
+.vercel/
+.netlify/
+
+# Package managers
+.pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Testing
+/coverage/
+.lcov*
+*.lcov
+nyc-output/
+
+# Miscellaneous
+*.tsbuildinfo
+*.npm
+*.seed
+*.log.log
+*.nasastruction
+dotenv.test
+.env.example
+.env.sample
+
+# Code coverage
+coverage/
+*.lcov
+
+# Dependency directories
+node_modules/
+jspm_packages/
+bower_components/
+jspm_packages/
+.wdio/
+.webpack/
+.build/
+.env*
+!.env.example
+!.env.sample
+
+# Misc
+.DS_Store
+Thumbs.db
+._*
+*.swp
+*~
+*.bak
+*.tmp
+*.temp
+.Obj
+*.exe
+*.dll
+*.class
+*.mp3
+*.avi
+*.mov
+*.mp4
+*.mkv
+*.flv
+*.wmv
+*.wma
+*.mid
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.bmp
+*.tiff
+*.webp
+*.ico
+*.svg
+*.psd
+*.ai
+*.indd
+*.pdf
+*.zip
+*.rar
+*.7z
+*.gz
+*.tar
+*.bak
+*.swp
+*~
+Thumbs.db
+._*
+.env
+.env.*
+!.env.example
+!.env.sample
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.pnpm-debug.log*
+debug.log*
+*.log
+*.txt
+.md
+.markdown
+.DS_Store
+Thumbs.db
+*/

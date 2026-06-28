@@ -1,0 +1,230 @@
+/* Simple academic styling + starfield layout */
+
+:root {
+  --bg: #000000;
+  --text: #ffffff;
+  --muted: #cccccc;
+  --muted-light: #888888;
+  --accent: #4a90e2;
+
+  --font-serif: 'Times New Roman', Times, serif;
+  --font-sans: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  --max-width: 960px;
+  --spacing: 2.5rem;
+}
+
+/* Reset & base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-serif);
+  background-color: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ---- Starfield ---- */
+#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -2;               /* behind everything */
+  display: block;
+}
+
+/* ---- Content wrapper ---- */
+.content {
+  position: relative;
+  z-index: -1;               /* behind sections but we'll make sections semi‑transparent */
+}
+
+/* ---- Sections ---- */
+.section {
+  position: relative;
+  min-height: 100vh;
+  padding: 8rem 2rem 4rem;
+  display: flex;
+  align-items: center;
+  background: rgba(0,0,0,0.35); /* semi‑transparent dark overlay for text readability */
+}
+
+.section-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 2.5rem;
+  background: rgba(0,0,0,0.45); /* more opaque for text */
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* ---- Headings ---- */
+.section h2 {
+  font-size: 2.1rem;
+  margin-bottom: 1.8rem;
+  color: var(--accent);
+  font-weight: 600;
+  letter-spacing: -0.3px;
+  position: relative;
+  display: inline-block;
+}
+.section h2::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--accent);
+  margin-top: 0.6rem;
+  border-radius: 2px;
+}
+
+/* ---- Hero ---- */
+#hero { text-align: center; padding-top: 10rem; }
+#hero h1 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: -0.5px;
+  color: var(--text);
+  text-shadow: 0 0 8px rgba(74,144,226,0.2);
+  margin-bottom: 1rem;
+}
+#hero .title {
+  font-size: 1.8rem;
+  color: var(--muted);
+  margin-bottom: 1.5rem;
+  font-weight: 300;
+}
+#hero .subtitle {
+  font-size: 1.2rem;
+  color: var(--muted-light);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ---- About ---- */
+#about p { margin-bottom: 1.5rem; font-size: 1.05rem; color: var(--muted); line-height: 1.8; }
+.research-interests h3 { margin-bottom: 1.2rem; color: var(--accent); font-size: 1.25rem; }
+.research-interests ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  gap: 1rem;
+}
+.research-interests li {
+  display: flex; align-items: center; padding: 0.35rem 0;
+}
+.research-interests li::before {
+  content: "→"; color: var(--accent); margin-right:0.5rem; font-size:1.1rem;
+}
+
+/* ---- Experience ---- */
+.timeline { display: grid; gap: 1.4rem; }
+.timeline-item {
+  background: rgba(0,0,0,0.3);
+  border-radius:5px; padding:1.4rem;
+  border-left:3px solid var(--accent);
+}
+.timeline-item h3 { color:var(--accent); margin-bottom:0.5rem; font-size:1.2rem; }
+.timeline-item .period {
+  color:var(--muted); font-weight:500; margin-bottom:1rem; display:block; font-size:0.9rem;
+}
+.timeline-item p { color:var(--muted); line-height:1.65; }
+
+/* ---- Skills ---- */
+.skills-grid { display:grid; gap:1.4rem; margin-top:1.4rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.skill-category h3 { color:var(--accent); margin-bottom:1rem; font-size:1.25rem; }
+.skill-category ul { list-style:none; }
+.skill-category li { padding:0.35rem 0; border-bottom:1px solid rgba(255,255,255,0.04); color:var(--muted); }
+.skill-category li:last-child { border-bottom:none; }
+
+/* ---- Projects ---- */
+.projects-grid { display:grid; gap:1.4rem; margin-top:1.4rem; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); }
+.project-card {
+  background:rgba(0,0,0,0.3);
+  border-radius:5px; padding:1.4rem;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.project-card h3 { color:var(--accent); margin-bottom:1rem; font-size:1.15rem; }
+.project-card p { color:var(--muted); margin-bottom:1.4rem; line-height:1.65; }
+.project-link {
+  display:inline-block; color:var(--accent); text-decoration:none;
+  font-weight:500; border-bottom:1px solid transparent;
+  transition:border-color .2s ease;
+}
+.project-link:hover { border-color:var(--accent); }
+
+/* ---- Personal ---- */
+#personal h2 { text-align:center; margin-bottom:1.8rem; }
+.personal-content {
+  display:flex; align-items:center; gap:1.4rem; margin-bottom:1.8rem;
+  background:rgba(0,0,0,0.3); border-radius:5px; padding:1.4rem;
+}
+.personal-content:nth-child(even) { flex-direction:row-reverse; }
+.image-placeholder {
+  width:180px; height:180px;
+  background:radial-gradient(circle at center,rgba(255,255,255,0.1)0%,transparent 70%);
+  border:2px dashed rgba(255,255,255,0.2);
+  border-radius:8px; position:relative; overflow:hidden;
+  display:flex; align-items:center; justify-content:center;
+}
+.placeholder-overlay {
+  text-align:center; color:var(--muted);
+}
+.placeholder-overlay h3 { color:var(--accent); margin-bottom:0.5rem; }
+.placeholder-overlay p { font-size:0.85rem; font-style:italic; }
+.personal-text { flex:1; }
+.personal-text h3 { color:var(--accent); margin-bottom:1rem; }
+.personal-text p { color:var(--muted); line-height:1.8; }
+
+/* ---- Contact ---- */
+#contact h2 { text-align:center; margin-bottom:1.8rem; }
+.contact-info { display:grid; gap:1.4rem; margin-top:1.4rem; grid-template-columns:repeat(auto-fit,minmax(240px,1fr)); }
+.contact-item {
+  background:rgba(0,0,0,0.3);
+  border-radius:5px; padding:1.4rem; text-align:center;
+  border:1px solid rgba(255,255,255,0.08);
+}
+.contact-item h3 { color:var(--accent); margin-bottom:1rem; }
+.contact-item p { color:var(--muted); margin-bottom:1rem; word-break:break-all; }
+.contact-link {
+  display:inline-block; color:var(--accent); text-decoration:none;
+  font-weight:500; border-bottom:1px solid transparent;
+  transition:border-color .2s ease;
+}
+.contact-link:hover { border-color:var(--accent); }
+
+/* ---- Responsive ---- */
+@media (max-width:768px) {
+  .section { padding:6rem 1.5rem 3rem; }
+  #hero h1 { font-size:2.8rem; }
+  #hero .title { font-size:1.3rem; }
+  .section h2 { font-size:1.8rem; }
+  .personal-content,
+  .personal-content:nth-child(even) { flex-direction:column; text-align:center; }
+  .image-placeholder { width:140px; height:140px; margin:0 auto 1rem; }
+  .personal-text { text-align:center; }
+}
+@media (max-width:480px) {
+  .section { padding:5rem 1rem 2.5rem; }
+  #hero h1 { font-size:2.2rem; }
+  #hero .title { font-size:1.2rem; }
+  .section h2 { font-size:1.5rem; }
+  .personal-content { padding:1rem; }
+  .image-placeholder { width:110px; height:110px; }
+  .contact-info { grid-template-columns:1fr; }
+}
