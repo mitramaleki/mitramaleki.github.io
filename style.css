@@ -1,0 +1,345 @@
+/* Minimal black & white styling */
+
+:root {
+  --bg: #000000;
+  --fg: #ffffff;
+  --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --max-width: 800px;
+  --spacing: 2rem;
+}
+
+/* Reset & base */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background-color: var(--bg);
+  color: var(--fg);
+  line-height: 1.6;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ---- Starfield ---- */
+#starfield {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  z-index: -2;               /* behind everything */
+  display: block;
+}
+
+/* ---- Content wrapper ---- */
+.content {
+  position: relative;
+  z-index: -1;               /* behind sections */
+}
+
+/* ---- Sections ---- */
+.section {
+  position: relative;
+  min-height: 100vh;
+  padding: var(--spacing) 2rem;
+  display: flex;
+  align-items: center;
+}
+
+.section-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  width: 100%;
+  padding: 2rem;
+}
+
+/* ---- Headings ---- */
+.section h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.2px;
+}
+
+/* ---- Hero ---- */
+#hero {
+  text-align: center;
+  padding-top: 8rem;
+}
+#hero h1 {
+  font-size: 3.5rem;
+  font-weight: 300;
+  letter-spacing: -0.3px;
+  margin-bottom: 0.5rem;
+}
+#hero .title {
+  font-size: 1.8rem;
+  font-weight: 300;
+  margin-bottom: 1rem;
+}
+#hero .subtitle {
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 0 auto 2rem;
+  line-height: 1.6;
+}
+
+/* ---- About ---- */
+#about p {
+  margin-bottom: 1.2rem;
+  font-size: 1.1rem;
+}
+.research-interests h3 {
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+.research-interests ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1rem;
+}
+.research-interests li {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0;
+}
+.research-interests li::before {
+  content: "–";
+  margin-right: 0.5rem;
+  color: var(--fg);
+}
+
+/* ---- Experience ---- */
+.timeline {
+  display: grid;
+  gap: 1.5rem;
+}
+.timeline-item {
+  padding: 1.5rem;
+  border-left: 2px solid var(--fg);
+}
+.timeline-item h3 {
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;
+}
+.timeline-item .period {
+  color: var(--fg);
+  font-weight: 500;
+  margin-bottom: 0.8rem;
+  display: block;
+  font-size: 0.9rem;
+}
+.timeline-item p {
+  color: var(--fg);
+  line-height: 1.6;
+}
+
+/* ---- Skills ---- */
+.skills-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.skill-category h3 {
+  color: var(--fg);
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+}
+.skill-category ul {
+  list-style: none;
+}
+.skill-category li {
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  color: var(--fg);
+}
+.skill-category li:last-child {
+  border-bottom: none;
+}
+
+/* ---- Projects ---- */
+.projects-grid {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+.project-card {
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.project-card h3 {
+  color: var(--fg);
+  margin-bottom: 1rem;
+  font-size: 1.15rem;
+}
+.project-card p {
+  color: var(--fg);
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+}
+.project-link {
+  display: inline-block;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.project-link:hover {
+  border-color: var(--fg);
+}
+
+/* ---- Personal ---- */
+#personal h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.personal-content {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.personal-content:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.image-placeholder {
+  width: 180px;
+  height: 180px;
+  border: 2px dashed var(--fg);
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.placeholder-overlay {
+  text-align: center;
+  color: var(--fg);
+}
+.placeholder-overlay h3 {
+  color: var(--fg);
+  margin-bottom: 0.5rem;
+}
+.placeholder-overlay p {
+  font-size: 0.85rem;
+  font-style: italic;
+}
+.personal-text {
+  flex: 1;
+}
+.personal-text h3 {
+  color: var(--fg);
+  margin-bottom: 1rem;
+}
+.personal-text p {
+  color: var(--fg);
+  line-height: 1.6;
+}
+
+/* ---- Contact ---- */
+#contact h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.contact-info {
+  display: grid;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+.contact-item {
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+.contact-item h3 {
+  color: var(--fg);
+  margin-bottom: 1rem;
+}
+.contact-item p {
+  color: var(--fg);
+  margin-bottom: 1rem;
+  word-break: break-all;
+}
+.contact-link {
+  display: inline-block;
+  color: var(--fg);
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s ease;
+}
+.contact-link:hover {
+  border-color: var(--fg);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .section {
+    padding: 4rem 1.5rem 2rem;
+  }
+  #hero h1 {
+    font-size: 2.8rem;
+  }
+  #hero .title {
+    font-size: 1.3rem;
+  }
+  .section h2 {
+    font-size: 1.8rem;
+  }
+  .personal-content,
+  .personal-content:nth-child(even) {
+    flex-direction: column;
+    text-align: center;
+  }
+  .image-placeholder {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto 1rem;
+  }
+  .personal-text {
+    text-align: center;
+  }
+}
+@media (max-width: 480px) {
+  .section {
+    padding: 3rem 1rem 1.5rem;
+  }
+  #hero h1 {
+    font-size: 2.2rem;
+  }
+  #hero .title {
+    font-size: 1.2rem;
+  }
+  .section h2 {
+    font-size: 1.5rem;
+  }
+  .personal-content {
+    padding: 1rem;
+  }
+  .image-placeholder {
+    width: 110px;
+    height: 110px;
+  }
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+}
