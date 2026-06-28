@@ -72,7 +72,9 @@ function initStarfield() {
 
     // Update stars
     stars.forEach(s => {
-      s.z -= s.baseSpeed * 12 * (0.5 + scrollProgress * 0.5);
+      // base drift + scroll-based parallax
+      const speedFactor = 0.2 + scrollProgress * 0.8; // 0.2 when no scroll, up to 1.0 at bottom
+      s.z -= s.baseSpeed * 12 * speedFactor;
       if (s.z <= 0) {
         s.z = 2000 + Math.random() * 500;
         s.x = Math.random() * canvas.width;
@@ -86,7 +88,10 @@ function initStarfield() {
       if (screenX > -1 && screenX < canvas.width + 1 &&
           screenY > -1 && screenY < canvas.height + 1) {
         const depthFactor = 1 - (s.z / 2000);
-        const brightness = 0.6 + depthFactor * 0.4; // 0.6-1.0
+        const baseBrightness = 0.6 + depthFactor * 0.4; // 0.6-1.0
+        // twinkle effect
+        const twinkle = Math.sin(now * 0.003 + s.x * 0.01 + s.y * 0.01) * 0.1;
+        const brightness = Math.min(1, Math.max(0, baseBrightness + twinkle));
         ctx.fillStyle = `rgba(255,255,255,${brightness})`;
         // Draw a 1px dot (centered)
         ctx.fillRect(screenX - 0.5, screenY - 0.5, 1, 1);
