@@ -5,8 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mitra Maleki - Astrophysics, AI & Cosmology</title>
   <meta name="description" content="MSc Astrophysics student at LMU Munich. Research interests in AI for cosmology, early universe physics, and multi-universe theory." />
+  <link rel="stylesheet" href="style.css" />
   <style>
-    /* ----- global reset & base ----- */
+    /* --- overall reset & base --- */
     * {
       margin: 0;
       padding: 0;
@@ -14,72 +15,80 @@
     }
 
     body {
-      background: #0b0e1a;
-      color: #d0d9f0;
-      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
-      line-height: 1.6;
-      padding: 20px;
-      min-height: 100vh;
-      position: relative;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: #0a0e1a;
+      color: #d0d8e8;
+      line-height: 1.7;
+      overflow-x: hidden;
     }
 
-    /* starfield canvas – behind everything */
     #starfield {
       position: fixed;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
+      width: 100vw;
+      height: 100vh;
       z-index: 0;
       pointer-events: none;
+      display: block;
     }
 
     .content {
       position: relative;
       z-index: 1;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
-      background: rgba(11, 14, 26, 0.75);
-      backdrop-filter: blur(4px);
-      border-radius: 32px;
-      padding: 20px 30px 40px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 20px 20px 60px;
     }
 
+    /* --- sections --- */
     .section {
-      margin-bottom: 50px;
-      scroll-margin-top: 20px;
+      background: rgba(10, 14, 30, 0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 24px;
+      margin: 30px 0;
+      padding: 10px 0;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
     }
 
     .section-content {
       max-width: 850px;
       margin: 0 auto;
-      padding: 0 10px;
+      padding: 20px 25px;
     }
 
     h1 {
-      font-size: 3rem;
+      font-size: 3.2rem;
       font-weight: 600;
-      letter-spacing: 1px;
-      color: #e8f0ff;
-      margin-bottom: 0.2rem;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #e0ecff, #88bbff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 6px;
     }
 
     h2 {
       font-size: 2rem;
       font-weight: 500;
       color: #c8daff;
-      border-bottom: 2px solid rgba(100, 150, 255, 0.2);
-      padding-bottom: 10px;
-      margin-bottom: 25px;
+      margin-bottom: 20px;
+      border-bottom: 1px solid rgba(100, 150, 255, 0.15);
+      padding-bottom: 8px;
     }
 
     h3 {
+      font-size: 1.3rem;
       font-weight: 500;
-      color: #b0ccff;
-      margin-top: 10px;
-      margin-bottom: 6px;
+      color: #aaddff;
+      margin: 16px 0 6px;
+    }
+
+    p {
+      margin-bottom: 16px;
+      color: #c8d2e6;
     }
 
     a {
@@ -89,34 +98,25 @@
     }
 
     a:hover {
-      color: #bbddff;
+      color: #b5d6ff;
       text-decoration: underline;
-    }
-
-    p {
-      margin-bottom: 1rem;
-      color: #c8d2ea;
     }
 
     .title {
       font-size: 1.3rem;
       font-weight: 300;
-      color: #aab9e0;
+      color: #b0c8ee;
+      margin-bottom: 4px;
     }
 
     .subtitle {
       font-size: 1.1rem;
       font-weight: 300;
-      color: #8a9fc9;
-      margin-top: 4px;
+      color: #7a94c0;
+      letter-spacing: 0.5px;
     }
 
-    /* hero */
-    .hero-image {
-      display: flex;
-      justify-content: center;
-    }
-
+    /* hero image */
     .hero-image img {
       width: 150px;
       height: 150px;
@@ -135,7 +135,6 @@
       border: 2px solid rgba(255, 255, 255, 0.1);
     }
 
-    /* publication lists */
     .publication-list {
       list-style: none;
       padding: 0;
@@ -150,13 +149,23 @@
       border-bottom: none;
     }
 
+    .publication-list a {
+      color: #88bbff;
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .publication-list a:hover {
+      color: #aaddff;
+      text-decoration: underline;
+    }
+
     .gcn-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 10px;
       padding: 0;
       list-style: none;
-      margin-top: 10px;
     }
 
     .gcn-list li {
@@ -177,7 +186,6 @@
       text-decoration: underline;
     }
 
-    /* timeline */
     .timeline-item {
       margin-bottom: 30px;
       padding-left: 20px;
@@ -185,15 +193,14 @@
     }
 
     .timeline-item h3 {
-      margin-bottom: 4px;
+      margin-bottom: 5px;
       color: #aaddff;
     }
 
     .period {
       color: #8899bb;
       font-size: 0.9em;
-      margin-top: -2px;
-      margin-bottom: 6px;
+      margin-top: 0;
     }
 
     .skill-tag {
@@ -204,7 +211,6 @@
       margin: 4px 6px 4px 0;
       font-size: 0.9em;
       border: 1px solid rgba(100, 150, 255, 0.2);
-      color: #c0d4ff;
     }
 
     .research-goal {
@@ -253,28 +259,28 @@
       color: #8899bb;
     }
 
-    /* responsive */
-    @media (max-width: 650px) {
-      .content {
+    /* Responsive */
+    @media (max-width: 640px) {
+      h1 {
+        font-size: 2.3rem;
+      }
+      .section-content {
         padding: 15px;
       }
-      h1 {
-        font-size: 2.2rem;
-      }
-      h2 {
-        font-size: 1.6rem;
+      .hero-image img {
+        width: 120px;
+        height: 120px;
       }
     }
   </style>
 </head>
-<body>
 
-  <!-- STARFIELD CANVAS (shooting stars now 45°) -->
+<body>
   <canvas id="starfield"></canvas>
 
   <div class="content">
 
-    <!-- HERO -->
+    <!-- HERO SECTION -->
     <section id="hero" class="section">
       <div class="section-content">
         <div class="hero-image">
@@ -286,7 +292,7 @@
       </div>
     </section>
 
-    <!-- ABOUT -->
+    <!-- ABOUT & RESEARCH VISION -->
     <section class="section">
       <div class="section-content">
         <h2>About Me</h2>
@@ -328,20 +334,33 @@
         <h2>Research Interests</h2>
         <div class="timeline-item">
           <h3>AI & Machine Learning for Cosmology</h3>
-          <p>Applying machine learning and deep learning techniques to cosmological problems — classification of astronomical transients, simulation of early universe conditions, and detection of anomalous patterns in large-scale structure data.</p>
+          <p>
+            Applying machine learning and deep learning techniques to cosmological problems —
+            classification of astronomical transients, simulation of early universe conditions,
+            and detection of anomalous patterns in large-scale structure data.
+          </p>
         </div>
         <div class="timeline-item">
           <h3>Early Universe & Inflationary Physics</h3>
-          <p>Investigating inflationary models, primordial black hole formation, and the quantum origins of cosmic structure. Interest in applying numerical methods, analytical techniques, and AI-assisted simulations to understand the universe's first fractions of a second.</p>
+          <p>
+            Investigating inflationary models, primordial black hole formation, and the
+            quantum origins of cosmic structure. Interest in applying numerical methods,
+            analytical techniques, and AI-assisted simulations to understand the universe's
+            first fractions of a second.
+          </p>
         </div>
         <div class="timeline-item">
           <h3>Multi-Universe Theory & Quantum Cosmology</h3>
-          <p>Exploring theoretical frameworks for parallel universes, quantum entanglement across cosmic scales, and the mathematical foundations of multi-universe concepts. Interested in whether AI can help detect signatures of other universes in cosmic data.</p>
+          <p>
+            Exploring theoretical frameworks for parallel universes, quantum entanglement
+            across cosmic scales, and the mathematical foundations of multi-universe concepts.
+            Interested in whether AI can help detect signatures of other universes in cosmic data.
+          </p>
         </div>
       </div>
     </section>
 
-    <!-- RESEARCH EXPERIENCE -->
+    <!-- PAST RESEARCH EXPERIENCE -->
     <section class="section">
       <div class="section-content">
         <h2>Research Experience</h2>
@@ -368,7 +387,7 @@
       </div>
     </section>
 
-    <!-- SKILLS -->
+    <!-- TECHNICAL SKILLS -->
     <section class="section">
       <div class="section-content">
         <h2>Technical Skills</h2>
@@ -420,7 +439,7 @@
       </div>
     </section>
 
-    <!-- PROFESSIONAL -->
+    <!-- PROFESSIONAL EXPERIENCE -->
     <section class="section">
       <div class="section-content">
         <h2>Professional Experience</h2>
@@ -437,7 +456,7 @@
       </div>
     </section>
 
-    <!-- WORKSHOPS -->
+    <!-- WORKSHOPS & TEACHING -->
     <section class="section">
       <div class="section-content">
         <h2>Workshops & Teaching</h2>
@@ -464,28 +483,73 @@
       </div>
     </section>
 
-    <!-- LIFE BEYOND -->
+    <!-- LIFE BEYOND RESEARCH -->
     <section class="section">
       <div class="section-content">
         <h2>Life Beyond Research</h2>
-        <p>I have been obsessed with astrophysics and science since I was a kid. I always wanted to become a scientist like the ones I saw in cartoons such as <i>Cloudy with a Chance of Meatballs</i>. That curiosity never really left me, and it slowly became the path I followed into physics and cosmology.</p>
-        <p><strong>Music</strong> was my first passion. I started playing the violin as a child, later learned the viola, and performed in orchestras for several years. Rehearsals and concerts became a normal part of my life, and I loved the discipline of working together to create something larger than any individual musician could. Eventually, as university became more demanding, I made the difficult decision to leave orchestras behind and devote my time to studying physics. I still play occasionally, although now it's simply for myself.</p>
-        <p><strong>Sports</strong> came next. I started skating as a kid, then moved into inline hockey, and later ice hockey. I played as a defense player for my team, trained a lot, and competed in different national leagues. I won two bronze medals — one in inline hockey and one in ice hockey. I also became a skating and hockey coach, coaching beginners and kids. Watching my students gain confidence on the ice was just as rewarding as competing myself.</p>
-        <p>Unfortunately, after a serious injury, I had to stop doing intensive sports. It wasn't an easy chapter to close, but it changed my life in a way where I had to slow down and focus more on other things like studying and research. The determination that once pushed me through long training sessions now finds its place in research, coding, and tackling difficult scientific problems.</p>
-        <p><strong>Languages</strong> are another passion. I'm currently studying German, Turkish, and Arabic at the same time — not because it's the easiest thing to do, but because I enjoy challenging myself and discovering new ways of understanding people and cultures. Sometimes I wonder whether trying to learn three languages at once is a good idea, but I'm still running the experiment.</p>
+        <p>
+          I have been obsessed with astrophysics and science since I was a kid. I always wanted to become a
+          scientist like the ones I saw in cartoons such as <i>Cloudy with a Chance of Meatballs</i>. That
+          curiosity never really left me, and it slowly became the path I followed into physics and cosmology.
+        </p>
+        <p>
+          <strong>Music</strong> was my first passion. I started playing the violin as a child, later learned
+          the viola, and performed in orchestras for several years. Rehearsals and concerts became a normal
+          part of my life, and I loved the discipline of working together to create something larger than
+          any individual musician could. Eventually, as university became more demanding, I made the difficult
+          decision to leave orchestras behind and devote my time to studying physics. I still play occasionally,
+          although now it's simply for myself.
+        </p>
+        <p>
+          <strong>Sports</strong> came next. I started skating as a kid, then moved into inline hockey,
+          and later ice hockey. I played as a defense player for my team, trained a lot, and competed in
+          different national leagues. I won two bronze medals — one in inline hockey and one in ice hockey.
+          I also became a skating and hockey coach, coaching beginners and kids. Watching my students gain
+          confidence on the ice was just as rewarding as competing myself.
+        </p>
+        <p>
+          Unfortunately, after a serious injury, I had to stop doing intensive sports. It wasn't an easy
+          chapter to close, but it changed my life in a way where I had to slow down and focus more on
+          other things like studying and research. The determination that once pushed me through long
+          training sessions now finds its place in research, coding, and tackling difficult scientific problems.
+        </p>
+        <p>
+          <strong>Languages</strong> are another passion. I'm currently studying German, Turkish, and Arabic
+          at the same time — not because it's the easiest thing to do, but because I enjoy challenging myself
+          and discovering new ways of understanding people and cultures. Sometimes I wonder whether trying
+          to learn three languages at once is a good idea, but I'm still running the experiment.
+        </p>
         <p>And when I'm not studying or working, I enjoy hiking with my dog.</p>
       </div>
     </section>
 
-    <!-- DOG -->
+    <!-- DOG SECTION -->
     <section class="section">
       <div class="section-content">
         <h2>My Dog</h2>
-        <p>My dog came into my life when I needed him the most. Since then, he has been with me through almost every stage of my life.</p>
-        <p>We went through everything together — from preparing for college entrance exams in Iran, getting accepted into one of the best universities there, and studying through my bachelor's degree. He was there during long study days, stressful moments, and all the changes that came with university life.</p>
-        <p>Later, he even moved with me to Germany so I could continue my master's degree. Moving countries was a big change for both of us, but having him there made everything feel more stable and familiar.</p>
-        <p>He has been my biggest academic partner in his own way. He doesn't understand cosmology or physics, but he has been present through all of it — every paper, every deadline, every milestone.</p>
-        <p>He is my biggest motivation, and I love him very much. I want to make him proud one day, so that when he meets other dogs at the park and they are all sniffing around, he can somehow tell them that my mama is a scientist.</p>
+        <p>
+          My dog came into my life when I needed him the most. Since then, he has been with me through
+          almost every stage of my life.
+        </p>
+        <p>
+          We went through everything together — from preparing for college entrance exams in Iran, getting
+          accepted into one of the best universities there, and studying through my bachelor's degree.
+          He was there during long study days, stressful moments, and all the changes that came with
+          university life.
+        </p>
+        <p>
+          Later, he even moved with me to Germany so I could continue my master's degree. Moving countries
+          was a big change for both of us, but having him there made everything feel more stable and familiar.
+        </p>
+        <p>
+          He has been my biggest academic partner in his own way. He doesn't understand cosmology or physics,
+          but he has been present through all of it — every paper, every deadline, every milestone.
+        </p>
+        <p>
+          He is my biggest motivation, and I love him very much. I want to make him proud one day, so that
+          when he meets other dogs at the park and they are all sniffing around, he can somehow tell them
+          that my mama is a scientist.
+        </p>
         <div class="dog-image">
           <img src="5911438853183049934.jpg" alt="My dog" />
         </div>
@@ -496,12 +560,12 @@
     <section class="section">
       <div class="section-content">
         <h2>Contact</h2>
-        <p>Email: <a href="mailto:mitra.maleki@campus.lmu.de">mitra.maleki@campus.lmu.de</a></p>
+        <p>Email: <a href="mailto:mitra.maleki@campus.lmu.de" style="color:#88bbff;">mitra.maleki@campus.lmu.de</a></p>
         <p>
-          <a href="https://www.linkedin.com/in/mitramaleki">LinkedIn</a> •
-          <a href="https://scholar.google.com">Google Scholar</a> •
-          <a href="https://github.com/mitramaleki">GitHub</a> •
-          <a href="https://www.researchgate.net/profile/Mitra-Maleki">ResearchGate</a>
+          <a href="https://www.linkedin.com/in/mitramaleki" style="color:#88bbff;">LinkedIn</a> •
+          <a href="https://scholar.google.com" style="color:#88bbff;">Google Scholar</a> •
+          <a href="https://github.com/mitramaleki" style="color:#88bbff;">GitHub</a> •
+          <a href="https://www.researchgate.net/profile/Mitra-Maleki" style="color:#88bbff;">ResearchGate</a>
         </p>
         <p style="margin-top:20px; font-size:0.9em; color:#8899bb;">
           <em>Languages:</em> English (C1), German (A2), Farsi (Native)
@@ -516,136 +580,133 @@
       const canvas = document.getElementById('starfield');
       const ctx = canvas.getContext('2d');
 
-      let width, height;
-      let stars = [];
-      let shootingStars = [];
+      let W, H;
 
-      // ----- resize -----
       function resize() {
-        width = window.innerWidth;
-        height = window.innerHeight;
-        canvas.width = width;
-        canvas.height = height;
+        W = canvas.width = window.innerWidth;
+        H = canvas.height = window.innerHeight;
       }
-      window.addEventListener('resize', () => {
-        resize();
-        initStars();
-      });
+      window.addEventListener('resize', resize);
+      resize();
 
-      // ----- static stars -----
-      function initStars() {
-        const count = Math.floor((width * height) / 2000) + 120;
-        stars = [];
-        for (let i = 0; i < count; i++) {
-          stars.push({
-            x: Math.random() * width,
-            y: Math.random() * height,
-            radius: Math.random() * 1.8 + 0.5,
-            brightness: Math.random() * 0.6 + 0.4,
-            twinkleSpeed: 0.005 + Math.random() * 0.02,
-            phase: Math.random() * Math.PI * 2
-          });
-        }
-      }
-
-      // ----- shooting star (45° direction, bottom-left to top-right) -----
-      function spawnShootingStar() {
-        // start from left-bottom edge (x: 0..20% , y: 80%..100%) or right-top (x:80%..100%, y:0..20%)
-        // to give variety but always 45° angle (dx = dy)
-        const edge = Math.random();
-        let x, y;
-        if (edge < 0.5) {
-          // start from left-bottom
-          x = Math.random() * width * 0.3;
-          y = height * 0.7 + Math.random() * height * 0.3;
-        } else {
-          // start from right-top
-          x = width * 0.7 + Math.random() * width * 0.3;
-          y = Math.random() * height * 0.3;
-        }
-
-        // length (trail) between 120 and 250 px
-        const len = 140 + Math.random() * 140;
-        // speed: pixels per frame (60fps)
-        const speed = 6 + Math.random() * 7;
-
-        // direction: 45° (dx = dy) but we can also mirror for natural look
-        // choose sign: if start from left-bottom, go up-right; if right-top, go down-left
-        let dx, dy;
-        if (x < width * 0.5 && y > height * 0.5) {
-          // bottom-left → up-right
-          dx = 1;
-          dy = -1;
-        } else {
-          // top-right → down-left
-          dx = -1;
-          dy = 1;
-        }
-        // but we want exactly 45°: normalize
-        const norm = Math.sqrt(dx*dx + dy*dy);
-        dx = dx / norm;
-        dy = dy / norm;
-
-        shootingStars.push({
-          x, y,
-          dx, dy,
-          speed: speed,
-          length: len,
-          life: 1.0,        // 1 → 0 over lifetime
-          maxLife: 60 + Math.random() * 80,
-          age: 0,
-          width: 1.8 + Math.random() * 2.5
+      // --- fixed star positions (static) ---
+      const STAR_COUNT = 180;
+      const stars = [];
+      for (let i = 0; i < STAR_COUNT; i++) {
+        stars.push({
+          x: Math.random() * W,
+          y: Math.random() * H,
+          r: 0.5 + Math.random() * 1.2,
+          brightness: 0.3 + Math.random() * 0.7,
+          twinkleSpeed: 0.005 + Math.random() * 0.015,
+          phase: Math.random() * Math.PI * 2
         });
       }
 
-      // ----- draw -----
-      function draw() {
-        ctx.clearRect(0, 0, width, height);
+      // --- shooting stars (with natural 45° angle) ---
+      const MAX_SHOOTERS = 14;
+      let shooters = [];
 
-        // 1) static stars
-        const time = Date.now() / 1000;
-        for (const s of stars) {
-          const bright = s.brightness * (0.7 + 0.3 * Math.sin(time * s.twinkleSpeed + s.phase));
+      // direction: 45° down-right (dx = dy) — natural meteor angle
+      const ANGLE = Math.PI / 4; // 45 degrees
+      const SPEED_BASE = 5.5;    // pixels per frame
+
+      function spawnShooter() {
+        // start from top-left region, but slightly random
+        const startX = Math.random() * W * 0.7;
+        const startY = Math.random() * H * 0.4;
+        const len = 60 + Math.random() * 80;    // tail length
+        const speed = SPEED_BASE + (Math.random() - 0.5) * 1.8;
+        shooters.push({
+          x: startX,
+          y: startY,
+          len: len,
+          speed: speed,
+          life: 0.8 + Math.random() * 0.6,      // seconds
+          maxLife: 0.8 + Math.random() * 0.6,
+          // precompute direction vector (dx, dy) for 45°
+          dx: Math.cos(ANGLE),
+          dy: Math.sin(ANGLE)
+        });
+      }
+
+      // initial burst
+      for (let i = 0; i < 8; i++) {
+        setTimeout(() => { if (shooters.length < MAX_SHOOTERS) spawnShooter(); }, i * 180);
+      }
+
+      // spawn loop
+      setInterval(() => {
+        if (shooters.length < MAX_SHOOTERS && Math.random() < 0.45) {
+          spawnShooter();
+        }
+      }, 400);
+
+      // --- draw ---
+      let lastTime = 0;
+
+      function draw(time) {
+        const dt = Math.min((time - lastTime) / 1000, 0.05);
+        lastTime = time;
+
+        // clear
+        ctx.clearRect(0, 0, W, H);
+
+        // 1) draw static stars
+        for (let s of stars) {
+          const flicker = 0.6 + 0.4 * Math.sin(time * s.twinkleSpeed + s.phase);
+          const alpha = s.brightness * flicker;
           ctx.beginPath();
-          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(230, 240, 255, ${bright})`;
+          ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha})`;
           ctx.fill();
         }
 
-        // 2) shooting stars (45°)
-        for (let i = shootingStars.length - 1; i >= 0; i--) {
-          const ss = shootingStars[i];
-          ss.age++;
-          ss.x += ss.dx * ss.speed;
-          ss.y += ss.dy * ss.speed;
-          ss.life = 1 - (ss.age / ss.maxLife);
-          if (ss.life <= 0 || ss.x < -200 || ss.x > width + 200 || ss.y < -200 || ss.y > height + 200) {
-            shootingStars.splice(i, 1);
+        // 2) update & draw shooting stars (45° natural fall)
+        for (let i = shooters.length - 1; i >= 0; i--) {
+          const s = shooters[i];
+          s.life -= dt;
+          if (s.life <= 0) {
+            shooters.splice(i, 1);
             continue;
           }
 
-          // draw trail (fading tail)
-          const tailLen = ss.length * ss.life;
-          const alpha = ss.life * 0.9;
-          const gradient = ctx.createLinearGradient(
-            ss.x, ss.y,
-            ss.x - ss.dx * tailLen, ss.y - ss.dy * tailLen
-          );
-          gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
-          gradient.addColorStop(0.3, `rgba(200, 220, 255, ${alpha * 0.7})`);
-          gradient.addColorStop(1, `rgba(150, 180, 255, 0)`);
+          // move along 45° direction
+          const dist = s.speed * dt * 70; // ~pixels per frame
+          s.x += s.dx * dist;
+          s.y += s.dy * dist;
+
+          // if out of canvas, remove
+          if (s.x > W + 100 || s.y > H + 100 || s.x < -100 || s.y < -100) {
+            shooters.splice(i, 1);
+            continue;
+          }
+
+          // tail: draw line with gradient
+          const progress = 1 - (s.life / s.maxLife);
+          const tailLen = s.len * (0.6 + 0.4 * (1 - progress));
+          const alpha = 0.4 + 0.6 * (1 - progress);
+
+          // start point (head) and end point (tail) along 45°
+          const endX = s.x - s.dx * tailLen;
+          const endY = s.y - s.dy * tailLen;
+
+          const grad = ctx.createLinearGradient(s.x, s.y, endX, endY);
+          grad.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
+          grad.addColorStop(0.4, `rgba(200, 220, 255, ${alpha * 0.7})`);
+          grad.addColorStop(1, `rgba(180, 200, 255, 0)`);
 
           ctx.beginPath();
-          ctx.moveTo(ss.x, ss.y);
-          ctx.lineTo(ss.x - ss.dx * tailLen, ss.y - ss.dy * tailLen);
-          ctx.strokeStyle = gradient;
-          ctx.lineWidth = ss.width * ss.life * 0.9 + 0.3;
+          ctx.moveTo(s.x, s.y);
+          ctx.lineTo(endX, endY);
+          ctx.strokeStyle = grad;
+          ctx.lineWidth = 1.6 + 1.2 * (1 - progress);
           ctx.lineCap = 'round';
           ctx.stroke();
 
-          // bright head
+          // small bright head
           ctx.beginPath();
-          ctx.arc(ss.x, ss.y, ss.width * 0.7 * ss.life + 0.8, 0, Math.PI * 2);
+          ctx.arc(s.x, s.y, 2.0 * (0.8 + 0.4 * (1 - progress)), 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.9})`;
           ctx.fill();
         }
@@ -653,31 +714,8 @@
         requestAnimationFrame(draw);
       }
 
-      // ----- spawn control -----
-      let spawnCounter = 0;
-      function spawnLoop() {
-        spawnCounter++;
-        // spawn every 15–30 frames (0.25–0.5 sec)
-        if (spawnCounter > 15 + Math.floor(Math.random() * 30)) {
-          if (shootingStars.length < 6) {
-            spawnShootingStar();
-          }
-          spawnCounter = 0;
-        }
-        requestAnimationFrame(spawnLoop);
-      }
-
-      // ----- init -----
-      resize();
-      initStars();
-      // seed a couple of shooting stars
-      for (let i = 0; i < 2; i++) {
-        setTimeout(() => spawnShootingStar(), i * 400);
-      }
-      draw();
-      spawnLoop();
+      requestAnimationFrame(draw);
     })();
   </script>
-
 </body>
 </html>
