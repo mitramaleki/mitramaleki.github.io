@@ -14,14 +14,14 @@ function initStarfield() {
   resize();
 
   // ---------- Stars ----------
-  const starCount = 5000;                     // 10x more stars
+  const starCount = 7000;                    // lots of tiny, ordinary stars
   const stars = [];
   for (let i = 0; i < starCount; i++) {
     stars.push({
       x: Math.random() * canvas.width,
       y: Math.random() * canvas.height,
       z: Math.random() * 2000,               // depth
-      radius: Math.random() * 0.8 + 0.2,     // base radius (will be scaled)
+      radius: Math.random() * 0.5 + 0.3,     // small: ~0.3–0.8px
       baseSpeed: 0.05 + Math.random() * 0.1, // faster base drift
       phase: Math.random() * Math.PI * 2    // per-star twinkle phase
     });
@@ -38,30 +38,26 @@ function initStarfield() {
     if (shootingStars.length >= maxShooting) return;
     if (Math.random() > spawnChance) return;
 
-    // Fully random direction so every shooting star travels at its own
-    // angle (e.g. 12°, 38°, 65°, 73°, 141°...) instead of only straight
-    // across or straight down.
+    // Pick a fully random angle (any of 0–360°), then work backward from a
+    // random point inside the canvas so the start position and the angle
+    // are independent of each other — this avoids the "always enters from
+    // the same edge at the same handful of angles" pattern.
     const angle = Math.random() * Math.PI * 2;
-    const speed = Math.random() * 3 + 2; // 2–5 px/frame
+    const speed = Math.random() * 4 + 3; // 3–7 px/frame
     const vx = Math.cos(angle) * speed;
     const vy = Math.sin(angle) * speed;
 
-    // Spawn just outside whichever edge the trajectory is heading away
-    // from, so it always travels across the visible canvas.
-    let sx, sy;
-    if (Math.abs(vx) >= Math.abs(vy)) {
-      sx = vx > 0 ? -50 : canvas.width + 50;
-      sy = Math.random() * canvas.height;
-    } else {
-      sx = Math.random() * canvas.width;
-      sy = vy > 0 ? -50 : canvas.height + 50;
-    }
+    const targetX = Math.random() * canvas.width;
+    const targetY = Math.random() * canvas.height;
+    const backDist = Math.max(canvas.width, canvas.height) * 0.7;
+    const sx = targetX - (vx / speed) * backDist;
+    const sy = targetY - (vy / speed) * backDist;
 
     shootingStars.push({
       x: sx, y: sy, vx: vx, vy: vy,
       life: 0, maxLife: 1,
-      decay: 0.02 + Math.random() * 0.03,
-      width: Math.random() * 2 + 1,
+      decay: 0.015 + Math.random() * 0.025,
+      width: Math.random() * 1.5 + 0.5,
       length: Math.random() * 60 + 30
     });
   }
@@ -108,9 +104,11 @@ function initStarfield() {
         if (brightness < 0.05) brightness = 0.05; // floor so we never lose a star completely
         if (brightness > 1) brightness = 1;
 
+        const r = s.radius * (0.6 + depthFactor * 0.8); // nearer = very slightly larger, still small
         ctx.fillStyle = `rgba(255,255,255,${brightness})`;
-        // Draw a 1-pixel dot (centered on the sub-pixel coordinates)
-        ctx.fillRect(screenX - 0.5, screenY - 0.5, 1, 1);
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, r, 0, Math.PI * 2);
+        ctx.fill();
       }
     });
 
