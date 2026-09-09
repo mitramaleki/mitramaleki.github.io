@@ -37,19 +37,26 @@ function initStarfield() {
   function spawnShooting() {
     if (shootingStars.length >= maxShooting) return;
     if (Math.random() > spawnChance) return;
-    const fromLeft = Math.random() < 0.5;
-    let sx, sy, vx, vy;
-    if (fromLeft) {
-      sx = -50;
-      sy = Math.random() * canvas.height * 0.6;
-      vx = Math.random() * 3 + 2;
-      vy = (Math.random() - 0.5) * 1;
+
+    // Fully random direction so every shooting star travels at its own
+    // angle (e.g. 12°, 38°, 65°, 73°, 141°...) instead of only straight
+    // across or straight down.
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 3 + 2; // 2–5 px/frame
+    const vx = Math.cos(angle) * speed;
+    const vy = Math.sin(angle) * speed;
+
+    // Spawn just outside whichever edge the trajectory is heading away
+    // from, so it always travels across the visible canvas.
+    let sx, sy;
+    if (Math.abs(vx) >= Math.abs(vy)) {
+      sx = vx > 0 ? -50 : canvas.width + 50;
+      sy = Math.random() * canvas.height;
     } else {
-      sx = Math.random() * canvas.width * 0.6;
-      sy = -50;
-      vx = (Math.random() - 0.5) * 1;
-      vy = Math.random() * 3 + 2;
+      sx = Math.random() * canvas.width;
+      sy = vy > 0 ? -50 : canvas.height + 50;
     }
+
     shootingStars.push({
       x: sx, y: sy, vx: vx, vy: vy,
       life: 0, maxLife: 1,
