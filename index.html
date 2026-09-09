@@ -1,120 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mitra Maleki - Astrophysics, AI & Cosmology</title>
-  <meta name="description" content="MSc Astrophysics student at LMU Munich. Research interests in AI for cosmology, early universe physics, and multi-universe theory.">
-  <link rel="stylesheet" href="style.css">
-  
+  <meta name="description" content="MSc Astrophysics student at LMU Munich. Research interests in AI for cosmology, early universe physics, and multi-universe theory." />
   <style>
-    /* Image sizing - small and clean */
+    /* ----- global reset & base ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #0b0e1a;
+      color: #d0d9f0;
+      font-family: 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+      padding: 20px;
+      min-height: 100vh;
+      position: relative;
+    }
+
+    /* starfield canvas – behind everything */
+    #starfield {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      max-width: 1000px;
+      margin: 0 auto;
+      background: rgba(11, 14, 26, 0.75);
+      backdrop-filter: blur(4px);
+      border-radius: 32px;
+      padding: 20px 30px 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .section {
+      margin-bottom: 50px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-content {
+      max-width: 850px;
+      margin: 0 auto;
+      padding: 0 10px;
+    }
+
+    h1 {
+      font-size: 3rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      color: #e8f0ff;
+      margin-bottom: 0.2rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 500;
+      color: #c8daff;
+      border-bottom: 2px solid rgba(100, 150, 255, 0.2);
+      padding-bottom: 10px;
+      margin-bottom: 25px;
+    }
+
+    h3 {
+      font-weight: 500;
+      color: #b0ccff;
+      margin-top: 10px;
+      margin-bottom: 6px;
+    }
+
+    a {
+      color: #88bbff;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    a:hover {
+      color: #bbddff;
+      text-decoration: underline;
+    }
+
+    p {
+      margin-bottom: 1rem;
+      color: #c8d2ea;
+    }
+
+    .title {
+      font-size: 1.3rem;
+      font-weight: 300;
+      color: #aab9e0;
+    }
+
+    .subtitle {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: #8a9fc9;
+      margin-top: 4px;
+    }
+
+    /* hero */
+    .hero-image {
+      display: flex;
+      justify-content: center;
+    }
+
     .hero-image img {
       width: 150px;
       height: 150px;
       border-radius: 50%;
       object-fit: cover;
       margin-bottom: 20px;
-      border: 3px solid rgba(255,255,255,0.2);
-      box-shadow: 0 0 30px rgba(100,150,255,0.3);
+      border: 3px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 0 30px rgba(100, 150, 255, 0.3);
     }
-    
+
     .dog-image img {
       width: 100%;
       max-width: 350px;
       border-radius: 12px;
       margin-top: 20px;
-      border: 2px solid rgba(255,255,255,0.1);
+      border: 2px solid rgba(255, 255, 255, 0.1);
     }
-    
-    .section-content {
-      max-width: 850px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    
-    /* Publication styling */
+
+    /* publication lists */
     .publication-list {
       list-style: none;
       padding: 0;
     }
-    
+
     .publication-list li {
       padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    
+
     .publication-list li:last-child {
       border-bottom: none;
     }
-    
-    .publication-list a {
-      color: #88bbff;
-      text-decoration: none;
-      transition: color 0.3s;
-    }
-    
-    .publication-list a:hover {
-      color: #aaddff;
-      text-decoration: underline;
-    }
-    
+
     .gcn-list {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
       gap: 10px;
       padding: 0;
       list-style: none;
+      margin-top: 10px;
     }
-    
+
     .gcn-list li {
-      background: rgba(255,255,255,0.05);
+      background: rgba(255, 255, 255, 0.05);
       padding: 8px 12px;
       border-radius: 6px;
       text-align: center;
     }
-    
+
     .gcn-list a {
       color: #88bbff;
       text-decoration: none;
       font-size: 0.95em;
     }
-    
+
     .gcn-list a:hover {
       color: #aaddff;
       text-decoration: underline;
     }
-    
+
+    /* timeline */
     .timeline-item {
       margin-bottom: 30px;
       padding-left: 20px;
-      border-left: 2px solid rgba(100,150,255,0.3);
+      border-left: 2px solid rgba(100, 150, 255, 0.3);
     }
-    
+
     .timeline-item h3 {
-      margin-bottom: 5px;
+      margin-bottom: 4px;
       color: #aaddff;
     }
-    
+
     .period {
       color: #8899bb;
       font-size: 0.9em;
-      margin-top: 0;
+      margin-top: -2px;
+      margin-bottom: 6px;
     }
-    
+
     .skill-tag {
       display: inline-block;
-      background: rgba(100,150,255,0.1);
+      background: rgba(100, 150, 255, 0.1);
       padding: 4px 12px;
       border-radius: 20px;
       margin: 4px 6px 4px 0;
       font-size: 0.9em;
-      border: 1px solid rgba(100,150,255,0.2);
+      border: 1px solid rgba(100, 150, 255, 0.2);
+      color: #c0d4ff;
     }
 
     .research-goal {
-      background: rgba(100,150,255,0.05);
-      border: 1px solid rgba(100,150,255,0.2);
+      background: rgba(100, 150, 255, 0.05);
+      border: 1px solid rgba(100, 150, 255, 0.2);
       border-radius: 12px;
       padding: 25px;
       margin: 20px 0;
@@ -141,10 +236,10 @@
     }
 
     .focus-item {
-      background: rgba(255,255,255,0.03);
+      background: rgba(255, 255, 255, 0.03);
       padding: 20px;
       border-radius: 10px;
-      border: 1px solid rgba(255,255,255,0.05);
+      border: 1px solid rgba(255, 255, 255, 0.05);
       text-align: center;
     }
 
@@ -157,19 +252,33 @@
       font-size: 0.95em;
       color: #8899bb;
     }
+
+    /* responsive */
+    @media (max-width: 650px) {
+      .content {
+        padding: 15px;
+      }
+      h1 {
+        font-size: 2.2rem;
+      }
+      h2 {
+        font-size: 1.6rem;
+      }
+    }
   </style>
 </head>
-
 <body>
+
+  <!-- STARFIELD CANVAS (shooting stars now 45°) -->
   <canvas id="starfield"></canvas>
 
   <div class="content">
 
-    <!-- HERO SECTION -->
+    <!-- HERO -->
     <section id="hero" class="section">
       <div class="section-content">
         <div class="hero-image">
-          <img src="ChatGPT Image Jun 27, 2026, 08_30_17 PM.png" alt="Mitra Maleki">
+          <img src="ChatGPT Image Jun 27, 2026, 08_30_17 PM.png" alt="Mitra Maleki" />
         </div>
         <h1>Mitra Maleki</h1>
         <p class="title">MSc Astrophysics Student • LMU Munich</p>
@@ -177,24 +286,21 @@
       </div>
     </section>
 
-    <!-- ABOUT & RESEARCH VISION -->
+    <!-- ABOUT -->
     <section class="section">
       <div class="section-content">
         <h2>About Me</h2>
-        
         <p>
-          I am an MSc Astrophysics student at Ludwig Maximilian University of Munich (LMU). 
-          My research interests lie at the intersection of <strong>artificial intelligence</strong>, 
+          I am an MSc Astrophysics student at Ludwig Maximilian University of Munich (LMU).
+          My research interests lie at the intersection of <strong>artificial intelligence</strong>,
           <strong>early universe cosmology</strong>, and the <strong>multi-universe concept</strong>.
         </p>
-
         <p>
-          AI is revolutionizing cosmology — from analyzing massive astronomical datasets to simulating complex 
-          physical phenomena and uncovering hidden patterns in cosmic structures. I am particularly interested 
-          in how machine learning and deep learning can help us understand the physics of the early universe 
+          AI is revolutionizing cosmology — from analyzing massive astronomical datasets to simulating complex
+          physical phenomena and uncovering hidden patterns in cosmic structures. I am particularly interested
+          in how machine learning and deep learning can help us understand the physics of the early universe
           and potentially reveal signatures of other universes.
         </p>
-
         <div class="focus-grid">
           <div class="focus-item">
             <h4>🤖 AI in Cosmology</h4>
@@ -209,7 +315,6 @@
             <p>Exploring theoretical frameworks for multiple universes and quantum cosmology</p>
           </div>
         </div>
-
         <div class="research-goal">
           <h3>🌌 My Big Goal</h3>
           <p class="big-vision">Understanding the Multi-Universe through AI-Driven Cosmology and Early Universe Physics</p>
@@ -221,60 +326,40 @@
     <section class="section">
       <div class="section-content">
         <h2>Research Interests</h2>
-        
         <div class="timeline-item">
           <h3>AI & Machine Learning for Cosmology</h3>
-          <p>
-            Applying machine learning and deep learning techniques to cosmological problems — 
-            classification of astronomical transients, simulation of early universe conditions, 
-            and detection of anomalous patterns in large-scale structure data.
-          </p>
+          <p>Applying machine learning and deep learning techniques to cosmological problems — classification of astronomical transients, simulation of early universe conditions, and detection of anomalous patterns in large-scale structure data.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Early Universe & Inflationary Physics</h3>
-          <p>
-            Investigating inflationary models, primordial black hole formation, and the 
-            quantum origins of cosmic structure. Interest in applying numerical methods, 
-            analytical techniques, and AI-assisted simulations to understand the universe's 
-            first fractions of a second.
-          </p>
+          <p>Investigating inflationary models, primordial black hole formation, and the quantum origins of cosmic structure. Interest in applying numerical methods, analytical techniques, and AI-assisted simulations to understand the universe's first fractions of a second.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Multi-Universe Theory & Quantum Cosmology</h3>
-          <p>
-            Exploring theoretical frameworks for parallel universes, quantum entanglement 
-            across cosmic scales, and the mathematical foundations of multi-universe concepts.
-            Interested in whether AI can help detect signatures of other universes in cosmic data.
-          </p>
+          <p>Exploring theoretical frameworks for parallel universes, quantum entanglement across cosmic scales, and the mathematical foundations of multi-universe concepts. Interested in whether AI can help detect signatures of other universes in cosmic data.</p>
         </div>
       </div>
     </section>
 
-    <!-- PAST RESEARCH EXPERIENCE -->
+    <!-- RESEARCH EXPERIENCE -->
     <section class="section">
       <div class="section-content">
         <h2>Research Experience</h2>
-        
         <div class="timeline-item">
           <h3>Multi-Messenger Astrophysics — LMU Munich</h3>
           <p class="period">2025–2026 • Supervisor: Prof. Daniel Gruen</p>
           <p>Analyzed large astrophysical datasets using semi-automated workflows. Contributed to observational follow-up of transient astrophysical events. Worked with Wendelstein Observatory data products.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Observational Astronomy — Wendelstein Observatory</h3>
           <p class="period">2025–2026</p>
           <p>Performed calibration, photometry, and image subtraction for transient events. Contributed to GRB follow-up analysis and time-domain studies. Results contributed to NASA GCN Circulars.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Cosmology & Early Universe Research — Sharif University</h3>
           <p class="period">2020–2024</p>
           <p>Studied cosmology using Baumann and Carroll, inflation theory (Weinberg), and primordial black hole formation. Applied analytical and numerical methods in early-universe cosmology.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Numerical Relativity Collaboration</h3>
           <p class="period">2025</p>
@@ -283,7 +368,7 @@
       </div>
     </section>
 
-    <!-- TECHNICAL SKILLS -->
+    <!-- SKILLS -->
     <section class="section">
       <div class="section-content">
         <h2>Technical Skills</h2>
@@ -309,23 +394,21 @@
     <section class="section">
       <div class="section-content">
         <h2>Publications & Research Outputs</h2>
-
         <h3>arXiv Preprints</h3>
         <ul class="publication-list">
           <li>
             <a href="https://arxiv.org/abs/2605.18973" target="_blank">
               <strong>GRB 260310A/SN 2026fgk: Photometric and Spectroscopic Evolution of a Nearby GRB-Supernova and an Exceptionally Bright Afterglow at z = 0.153</strong>
             </a>
-            <br>B. O'Connor, M. Busmann, X.J. Hall, K. Taguchi, M. Tanaka, D. Gruen, <strong>M. Maleki</strong>, et al.
+            <br />B. O'Connor, M. Busmann, X.J. Hall, K. Taguchi, M. Tanaka, D. Gruen, <strong>M. Maleki</strong>, et al.
           </li>
           <li>
             <a href="https://arxiv.org/abs/2606.09992" target="_blank">
               <strong>EP260321a/SN 2026gzf: The Faintest Shock Breakout Associated with a Broad-Lined Supernova</strong>
             </a>
-            <br>B. O'Connor, X.J. Hall, M. Busmann, D. Gruen, A. Floris, T. Cabrera, Z. Zhu, <strong>M. Maleki</strong>, et al.
+            <br />B. O'Connor, X.J. Hall, M. Busmann, D. Gruen, A. Floris, T. Cabrera, Z. Zhu, <strong>M. Maleki</strong>, et al.
           </li>
         </ul>
-
         <h3>NASA GCN Circulars</h3>
         <ul class="gcn-list">
           <li><a href="https://gcn.nasa.gov/circulars/44061" target="_blank">GCN 44061</a></li>
@@ -337,17 +420,15 @@
       </div>
     </section>
 
-    <!-- PROFESSIONAL EXPERIENCE -->
+    <!-- PROFESSIONAL -->
     <section class="section">
       <div class="section-content">
         <h2>Professional Experience</h2>
-        
         <div class="timeline-item">
           <h3>Data Engineering & AI Automation — Experteer GmbH</h3>
           <p class="period">2026–Present</p>
           <p>Building data validation and automation workflows for structured datasets. Designing AI-assisted process automation using n8n. Developing systems for operational data handling and reporting.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Marketing Manager — Accutek Packaging Equipment Company, Inc.</h3>
           <p class="period">2022–2025</p>
@@ -356,29 +437,25 @@
       </div>
     </section>
 
-    <!-- WORKSHOPS & TEACHING -->
+    <!-- WORKSHOPS -->
     <section class="section">
       <div class="section-content">
         <h2>Workshops & Teaching</h2>
-        
         <div class="timeline-item">
           <h3>IPM Cosmology Workshop</h3>
           <p class="period">2023</p>
           <p>Theoretical and observational cosmology training program.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Giambiagi Winter School on Cosmology</h3>
           <p class="period">2023</p>
           <p>Topics included CMB, dark matter, gravitational waves, and structure formation.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Astrophysical Flows Workshop (Pencil Code)</h3>
           <p class="period">2025</p>
           <p>Hydrodynamic simulations and astrophysical fluid modeling.</p>
         </div>
-
         <div class="timeline-item">
           <h3>Teaching Assistant — Physics 3</h3>
           <p class="period">2023 • Sharif University of Technology</p>
@@ -387,89 +464,30 @@
       </div>
     </section>
 
-    <!-- LIFE BEYOND RESEARCH -->
+    <!-- LIFE BEYOND -->
     <section class="section">
       <div class="section-content">
         <h2>Life Beyond Research</h2>
-        
-        <p>
-          I have been obsessed with astrophysics and science since I was a kid. I always wanted to become a 
-          scientist like the ones I saw in cartoons such as <i>Cloudy with a Chance of Meatballs</i>. That 
-          curiosity never really left me, and it slowly became the path I followed into physics and cosmology.
-        </p>
-
-        <p>
-          <strong>Music</strong> was my first passion. I started playing the violin as a child, later learned 
-          the viola, and performed in orchestras for several years. Rehearsals and concerts became a normal 
-          part of my life, and I loved the discipline of working together to create something larger than 
-          any individual musician could. Eventually, as university became more demanding, I made the difficult 
-          decision to leave orchestras behind and devote my time to studying physics. I still play occasionally, 
-          although now it's simply for myself.
-        </p>
-
-        <p>
-          <strong>Sports</strong> came next. I started skating as a kid, then moved into inline hockey, 
-          and later ice hockey. I played as a defense player for my team, trained a lot, and competed in 
-          different national leagues. I won two bronze medals — one in inline hockey and one in ice hockey. 
-          I also became a skating and hockey coach, coaching beginners and kids. Watching my students gain 
-          confidence on the ice was just as rewarding as competing myself.
-        </p>
-
-        <p>
-          Unfortunately, after a serious injury, I had to stop doing intensive sports. It wasn't an easy 
-          chapter to close, but it changed my life in a way where I had to slow down and focus more on 
-          other things like studying and research. The determination that once pushed me through long 
-          training sessions now finds its place in research, coding, and tackling difficult scientific problems.
-        </p>
-
-        <p>
-          <strong>Languages</strong> are another passion. I'm currently studying German, Turkish, and Arabic 
-          at the same time — not because it's the easiest thing to do, but because I enjoy challenging myself 
-          and discovering new ways of understanding people and cultures. Sometimes I wonder whether trying 
-          to learn three languages at once is a good idea, but I'm still running the experiment.
-        </p>
-
-        <p>
-          And when I'm not studying or working, I enjoy hiking with my dog.
-        </p>
+        <p>I have been obsessed with astrophysics and science since I was a kid. I always wanted to become a scientist like the ones I saw in cartoons such as <i>Cloudy with a Chance of Meatballs</i>. That curiosity never really left me, and it slowly became the path I followed into physics and cosmology.</p>
+        <p><strong>Music</strong> was my first passion. I started playing the violin as a child, later learned the viola, and performed in orchestras for several years. Rehearsals and concerts became a normal part of my life, and I loved the discipline of working together to create something larger than any individual musician could. Eventually, as university became more demanding, I made the difficult decision to leave orchestras behind and devote my time to studying physics. I still play occasionally, although now it's simply for myself.</p>
+        <p><strong>Sports</strong> came next. I started skating as a kid, then moved into inline hockey, and later ice hockey. I played as a defense player for my team, trained a lot, and competed in different national leagues. I won two bronze medals — one in inline hockey and one in ice hockey. I also became a skating and hockey coach, coaching beginners and kids. Watching my students gain confidence on the ice was just as rewarding as competing myself.</p>
+        <p>Unfortunately, after a serious injury, I had to stop doing intensive sports. It wasn't an easy chapter to close, but it changed my life in a way where I had to slow down and focus more on other things like studying and research. The determination that once pushed me through long training sessions now finds its place in research, coding, and tackling difficult scientific problems.</p>
+        <p><strong>Languages</strong> are another passion. I'm currently studying German, Turkish, and Arabic at the same time — not because it's the easiest thing to do, but because I enjoy challenging myself and discovering new ways of understanding people and cultures. Sometimes I wonder whether trying to learn three languages at once is a good idea, but I'm still running the experiment.</p>
+        <p>And when I'm not studying or working, I enjoy hiking with my dog.</p>
       </div>
     </section>
 
-    <!-- DOG SECTION -->
+    <!-- DOG -->
     <section class="section">
       <div class="section-content">
         <h2>My Dog</h2>
-        
-        <p>
-          My dog came into my life when I needed him the most. Since then, he has been with me through 
-          almost every stage of my life.
-        </p>
-
-        <p>
-          We went through everything together — from preparing for college entrance exams in Iran, getting 
-          accepted into one of the best universities there, and studying through my bachelor's degree. 
-          He was there during long study days, stressful moments, and all the changes that came with 
-          university life.
-        </p>
-
-        <p>
-          Later, he even moved with me to Germany so I could continue my master's degree. Moving countries 
-          was a big change for both of us, but having him there made everything feel more stable and familiar.
-        </p>
-
-        <p>
-          He has been my biggest academic partner in his own way. He doesn't understand cosmology or physics, 
-          but he has been present through all of it — every paper, every deadline, every milestone.
-        </p>
-
-        <p>
-          He is my biggest motivation, and I love him very much. I want to make him proud one day, so that 
-          when he meets other dogs at the park and they are all sniffing around, he can somehow tell them 
-          that my mama is a scientist.
-        </p>
-
+        <p>My dog came into my life when I needed him the most. Since then, he has been with me through almost every stage of my life.</p>
+        <p>We went through everything together — from preparing for college entrance exams in Iran, getting accepted into one of the best universities there, and studying through my bachelor's degree. He was there during long study days, stressful moments, and all the changes that came with university life.</p>
+        <p>Later, he even moved with me to Germany so I could continue my master's degree. Moving countries was a big change for both of us, but having him there made everything feel more stable and familiar.</p>
+        <p>He has been my biggest academic partner in his own way. He doesn't understand cosmology or physics, but he has been present through all of it — every paper, every deadline, every milestone.</p>
+        <p>He is my biggest motivation, and I love him very much. I want to make him proud one day, so that when he meets other dogs at the park and they are all sniffing around, he can somehow tell them that my mama is a scientist.</p>
         <div class="dog-image">
-          <img src="5911438853183049934.jpg" alt="My dog">
+          <img src="5911438853183049934.jpg" alt="My dog" />
         </div>
       </div>
     </section>
@@ -478,12 +496,12 @@
     <section class="section">
       <div class="section-content">
         <h2>Contact</h2>
-        <p>Email: <a href="mailto:mitra.maleki@campus.lmu.de" style="color:#88bbff;">mitra.maleki@campus.lmu.de</a></p>
+        <p>Email: <a href="mailto:mitra.maleki@campus.lmu.de">mitra.maleki@campus.lmu.de</a></p>
         <p>
-          <a href="https://www.linkedin.com/in/mitramaleki" style="color:#88bbff;">LinkedIn</a> • 
-          <a href="https://scholar.google.com" style="color:#88bbff;">Google Scholar</a> • 
-          <a href="https://github.com/mitramaleki" style="color:#88bbff;">GitHub</a> • 
-          <a href="https://www.researchgate.net/profile/Mitra-Maleki" style="color:#88bbff;">ResearchGate</a>
+          <a href="https://www.linkedin.com/in/mitramaleki">LinkedIn</a> •
+          <a href="https://scholar.google.com">Google Scholar</a> •
+          <a href="https://github.com/mitramaleki">GitHub</a> •
+          <a href="https://www.researchgate.net/profile/Mitra-Maleki">ResearchGate</a>
         </p>
         <p style="margin-top:20px; font-size:0.9em; color:#8899bb;">
           <em>Languages:</em> English (C1), German (A2), Farsi (Native)
@@ -493,6 +511,173 @@
 
   </div>
 
-  <script src="script.js"></script>
+  <script>
+    (function() {
+      const canvas = document.getElementById('starfield');
+      const ctx = canvas.getContext('2d');
+
+      let width, height;
+      let stars = [];
+      let shootingStars = [];
+
+      // ----- resize -----
+      function resize() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+      }
+      window.addEventListener('resize', () => {
+        resize();
+        initStars();
+      });
+
+      // ----- static stars -----
+      function initStars() {
+        const count = Math.floor((width * height) / 2000) + 120;
+        stars = [];
+        for (let i = 0; i < count; i++) {
+          stars.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            radius: Math.random() * 1.8 + 0.5,
+            brightness: Math.random() * 0.6 + 0.4,
+            twinkleSpeed: 0.005 + Math.random() * 0.02,
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      // ----- shooting star (45° direction, bottom-left to top-right) -----
+      function spawnShootingStar() {
+        // start from left-bottom edge (x: 0..20% , y: 80%..100%) or right-top (x:80%..100%, y:0..20%)
+        // to give variety but always 45° angle (dx = dy)
+        const edge = Math.random();
+        let x, y;
+        if (edge < 0.5) {
+          // start from left-bottom
+          x = Math.random() * width * 0.3;
+          y = height * 0.7 + Math.random() * height * 0.3;
+        } else {
+          // start from right-top
+          x = width * 0.7 + Math.random() * width * 0.3;
+          y = Math.random() * height * 0.3;
+        }
+
+        // length (trail) between 120 and 250 px
+        const len = 140 + Math.random() * 140;
+        // speed: pixels per frame (60fps)
+        const speed = 6 + Math.random() * 7;
+
+        // direction: 45° (dx = dy) but we can also mirror for natural look
+        // choose sign: if start from left-bottom, go up-right; if right-top, go down-left
+        let dx, dy;
+        if (x < width * 0.5 && y > height * 0.5) {
+          // bottom-left → up-right
+          dx = 1;
+          dy = -1;
+        } else {
+          // top-right → down-left
+          dx = -1;
+          dy = 1;
+        }
+        // but we want exactly 45°: normalize
+        const norm = Math.sqrt(dx*dx + dy*dy);
+        dx = dx / norm;
+        dy = dy / norm;
+
+        shootingStars.push({
+          x, y,
+          dx, dy,
+          speed: speed,
+          length: len,
+          life: 1.0,        // 1 → 0 over lifetime
+          maxLife: 60 + Math.random() * 80,
+          age: 0,
+          width: 1.8 + Math.random() * 2.5
+        });
+      }
+
+      // ----- draw -----
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+
+        // 1) static stars
+        const time = Date.now() / 1000;
+        for (const s of stars) {
+          const bright = s.brightness * (0.7 + 0.3 * Math.sin(time * s.twinkleSpeed + s.phase));
+          ctx.beginPath();
+          ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(230, 240, 255, ${bright})`;
+          ctx.fill();
+        }
+
+        // 2) shooting stars (45°)
+        for (let i = shootingStars.length - 1; i >= 0; i--) {
+          const ss = shootingStars[i];
+          ss.age++;
+          ss.x += ss.dx * ss.speed;
+          ss.y += ss.dy * ss.speed;
+          ss.life = 1 - (ss.age / ss.maxLife);
+          if (ss.life <= 0 || ss.x < -200 || ss.x > width + 200 || ss.y < -200 || ss.y > height + 200) {
+            shootingStars.splice(i, 1);
+            continue;
+          }
+
+          // draw trail (fading tail)
+          const tailLen = ss.length * ss.life;
+          const alpha = ss.life * 0.9;
+          const gradient = ctx.createLinearGradient(
+            ss.x, ss.y,
+            ss.x - ss.dx * tailLen, ss.y - ss.dy * tailLen
+          );
+          gradient.addColorStop(0, `rgba(255, 255, 255, ${alpha})`);
+          gradient.addColorStop(0.3, `rgba(200, 220, 255, ${alpha * 0.7})`);
+          gradient.addColorStop(1, `rgba(150, 180, 255, 0)`);
+
+          ctx.beginPath();
+          ctx.moveTo(ss.x, ss.y);
+          ctx.lineTo(ss.x - ss.dx * tailLen, ss.y - ss.dy * tailLen);
+          ctx.strokeStyle = gradient;
+          ctx.lineWidth = ss.width * ss.life * 0.9 + 0.3;
+          ctx.lineCap = 'round';
+          ctx.stroke();
+
+          // bright head
+          ctx.beginPath();
+          ctx.arc(ss.x, ss.y, ss.width * 0.7 * ss.life + 0.8, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${alpha * 0.9})`;
+          ctx.fill();
+        }
+
+        requestAnimationFrame(draw);
+      }
+
+      // ----- spawn control -----
+      let spawnCounter = 0;
+      function spawnLoop() {
+        spawnCounter++;
+        // spawn every 15–30 frames (0.25–0.5 sec)
+        if (spawnCounter > 15 + Math.floor(Math.random() * 30)) {
+          if (shootingStars.length < 6) {
+            spawnShootingStar();
+          }
+          spawnCounter = 0;
+        }
+        requestAnimationFrame(spawnLoop);
+      }
+
+      // ----- init -----
+      resize();
+      initStars();
+      // seed a couple of shooting stars
+      for (let i = 0; i < 2; i++) {
+        setTimeout(() => spawnShootingStar(), i * 400);
+      }
+      draw();
+      spawnLoop();
+    })();
+  </script>
+
 </body>
 </html>
