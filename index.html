@@ -40,12 +40,7 @@
     }
     
     .publication-list li {
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    .publication-list li:last-child {
-      border-bottom: none;
+      padding: 10px 0;
     }
     
     .publication-list a {
@@ -60,19 +55,21 @@
     }
     
     .gcn-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 4px;
       padding: 0;
       list-style: none;
     }
-    
+
     .gcn-list li {
       background: transparent;
-      padding: 6px 4px;
-      border-radius: 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      text-align: center;
+    }
+
+    .gcn-list li:not(:last-child)::after {
+      content: "·";
+      color: #556680;
+      margin-left: 10px;
     }
     
     .gcn-list a {
@@ -87,9 +84,7 @@
     }
     
     .timeline-item {
-      margin-bottom: 30px;
-      padding-left: 20px;
-      border-left: 2px solid rgba(100,150,255,0.3);
+      margin-bottom: 28px;
     }
     
     .timeline-item h3 {
@@ -104,23 +99,19 @@
     }
     
     .skill-tag {
-      display: inline-block;
+      display: inline;
       background: transparent;
-      padding: 3px 0;
-      margin: 0 18px 8px 0;
-      font-size: 0.9em;
       color: #9fb3d4;
-      border: none;
-      border-bottom: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.95em;
+    }
+
+    .skill-tag:not(:last-child)::after {
+      content: " · ";
+      color: #556680;
     }
 
     .research-goal {
       background: transparent;
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.1);
-      border-bottom: 1px solid rgba(255,255,255,0.1);
-      border-radius: 0;
-      padding: 20px 0;
       margin: 24px 0;
       text-align: center;
     }
@@ -128,6 +119,7 @@
     .research-goal h3 {
       color: #88bbff;
       font-size: 1.3em;
+      margin-bottom: 8px;
     }
 
     .research-goal .big-vision {
@@ -141,21 +133,18 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 20px;
-      margin: 20px 0;
+      margin: 24px 0;
     }
 
     .focus-item {
       background: transparent;
-      padding: 16px 4px 0;
-      border-radius: 0;
-      border: none;
-      border-top: 1px solid rgba(255,255,255,0.1);
       text-align: center;
     }
 
     .focus-item h4 {
       color: #88bbff;
       margin-bottom: 8px;
+      font-weight: 500;
     }
 
     .focus-item p {
