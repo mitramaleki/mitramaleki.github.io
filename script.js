@@ -1,346 +1,147 @@
-/* Minimal black & white styling */
+document.addEventListener('DOMContentLoaded', () => {
+  initStarfield();
+});
 
-:root {
-  --bg: #000000;
-  --fg: #ffffff;
-  --font: 'EB Garamond', 'Georgia', 'Times New Roman', serif;
-  --max-width: 800px;
-  --spacing: 2rem;
-}
+function initStarfield() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
 
-/* Reset & base */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  font-family: var(--font);
-  background-color: var(--bg);
-  color: var(--fg);
-  line-height: 1.6;
-  overflow-x: hidden;
-  min-height: 100vh;
-  position: relative;
-}
-
-/* ---- Starfield ---- */
-#starfield {
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  z-index: -2;               /* behind everything */
-  display: block;
-}
-
-/* ---- Content wrapper ---- */
-.content {
-  position: relative;
-  z-index: -1;               /* behind sections */
-}
-
-/* ---- Sections ---- */
-.section {
-  position: relative;
-  min-height: 100vh;
-  padding: var(--spacing) 2rem;
-  display: flex;
-  align-items: center;
-}
-
-.section-content {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  width: 100%;
-  padding: 2rem;
-}
-
-/* ---- Headings ---- */
-.section h2 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-  font-weight: 600;
-  letter-spacing: 0.3px;
-}
-
-/* ---- Hero ---- */
-#hero {
-  text-align: center;
-  padding-top: 8rem;
-}
-#hero h1 {
-  font-size: 3.6rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.5rem;
-}
-#hero .title {
-  font-size: 1.8rem;
-  font-weight: 400;
-  font-style: italic;
-  margin-bottom: 1rem;
-}
-#hero .subtitle {
-  font-size: 1.2rem;
-  max-width: 600px;
-  margin: 0 auto 2rem;
-  line-height: 1.6;
-}
-
-/* ---- About ---- */
-#about p {
-  margin-bottom: 1.2rem;
-  font-size: 1.1rem;
-}
-.research-interests h3 {
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-}
-.research-interests ul {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1rem;
-}
-.research-interests li {
-  display: flex;
-  align-items: center;
-  padding: 0.25rem 0;
-}
-.research-interests li::before {
-  content: "–";
-  margin-right: 0.5rem;
-  color: var(--fg);
-}
-
-/* ---- Experience ---- */
-.timeline {
-  display: grid;
-  gap: 1.5rem;
-}
-.timeline-item {
-  padding: 1.5rem;
-  border-left: 2px solid var(--fg);
-}
-.timeline-item h3 {
-  color: var(--fg);
-  margin-bottom: 0.5rem;
-  font-size: 1.2rem;
-}
-.timeline-item .period {
-  color: var(--fg);
-  font-weight: 500;
-  margin-bottom: 0.8rem;
-  display: block;
-  font-size: 0.9rem;
-}
-.timeline-item p {
-  color: var(--fg);
-  line-height: 1.6;
-}
-
-/* ---- Skills ---- */
-.skills-grid {
-  display: grid;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-.skill-category h3 {
-  color: var(--fg);
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-}
-.skill-category ul {
-  list-style: none;
-}
-.skill-category li {
-  padding: 0.35rem 0;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  color: var(--fg);
-}
-.skill-category li:last-child {
-  border-bottom: none;
-}
-
-/* ---- Projects ---- */
-.projects-grid {
-  display: grid;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-}
-.project-card {
-  padding: 1.5rem;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.project-card h3 {
-  color: var(--fg);
-  margin-bottom: 1rem;
-  font-size: 1.15rem;
-}
-.project-card p {
-  color: var(--fg);
-  margin-bottom: 1.2rem;
-  line-height: 1.6;
-}
-.project-link {
-  display: inline-block;
-  color: var(--fg);
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-.project-link:hover {
-  border-color: var(--fg);
-}
-
-/* ---- Personal ---- */
-#personal h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.personal-content {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  margin-bottom: 1.5rem;
-  padding: 1.5rem;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.personal-content:nth-child(even) {
-  flex-direction: row-reverse;
-}
-.image-placeholder {
-  width: 180px;
-  height: 180px;
-  border: 2px dashed var(--fg);
-  border-radius: 8px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.placeholder-overlay {
-  text-align: center;
-  color: var(--fg);
-}
-.placeholder-overlay h3 {
-  color: var(--fg);
-  margin-bottom: 0.5rem;
-}
-.placeholder-overlay p {
-  font-size: 0.85rem;
-  font-style: italic;
-}
-.personal-text {
-  flex: 1;
-}
-.personal-text h3 {
-  color: var(--fg);
-  margin-bottom: 1rem;
-}
-.personal-text p {
-  color: var(--fg);
-  line-height: 1.6;
-}
-
-/* ---- Contact ---- */
-#contact h2 {
-  text-align: center;
-  margin-bottom: 1.5rem;
-}
-.contact-info {
-  display: grid;
-  gap: 1.5rem;
-  margin-top: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-}
-.contact-item {
-  padding: 1.5rem;
-  text-align: center;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-.contact-item h3 {
-  color: var(--fg);
-  margin-bottom: 1rem;
-}
-.contact-item p {
-  color: var(--fg);
-  margin-bottom: 1rem;
-  word-break: break-all;
-}
-.contact-link {
-  display: inline-block;
-  color: var(--fg);
-  text-decoration: none;
-  font-weight: 500;
-  border-bottom: 1px solid transparent;
-  transition: border-color 0.2s ease;
-}
-.contact-link:hover {
-  border-color: var(--fg);
-}
-
-/* ---- Responsive ---- */
-@media (max-width: 768px) {
-  .section {
-    padding: 4rem 1.5rem 2rem;
+  function resize() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
   }
-  #hero h1 {
-    font-size: 2.8rem;
+  window.addEventListener('resize', resize);
+  resize();
+
+  // ---------- Stars ----------
+  const starCount = 7000;                    // lots of tiny, ordinary stars
+  const stars = [];
+  for (let i = 0; i < starCount; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      z: Math.random() * 2000,               // depth
+      radius: Math.random() * 0.5 + 0.3,     // small: ~0.3–0.8px
+      baseSpeed: 0.05 + Math.random() * 0.1, // faster base drift
+      phase: Math.random() * Math.PI * 2    // per-star twinkle phase
+    });
   }
-  #hero .title {
-    font-size: 1.3rem;
+
+  // ---------- Shooting stars ----------
+  const shootingStars = [];
+  const maxShooting = 14;                    // many more simultaneous shooting stars
+  let lastSpawn = 0;
+  const spawnInterval = 150;                 // ms – much more frequent
+  const spawnChance = 0.95;                  // almost always spawns each interval
+  const spawnsPerTick = 2;                   // try spawning more than one at a time
+
+  function spawnShooting() {
+    if (shootingStars.length >= maxShooting) return;
+    if (Math.random() > spawnChance) return;
+
+    // Pick a fully random angle (any of 0–360°), then work backward from a
+    // random point inside the canvas so the start position and the angle
+    // are independent of each other — this avoids the "always enters from
+    // the same edge at the same handful of angles" pattern.
+    const angle = Math.random() * Math.PI * 2;
+    const speed = Math.random() * 4 + 3; // 3–7 px/frame
+    const vx = Math.cos(angle) * speed;
+    const vy = Math.sin(angle) * speed;
+
+    const targetX = Math.random() * canvas.width;
+    const targetY = Math.random() * canvas.height;
+    const backDist = Math.max(canvas.width, canvas.height) * 0.7;
+    const sx = targetX - (vx / speed) * backDist;
+    const sy = targetY - (vy / speed) * backDist;
+
+    shootingStars.push({
+      x: sx, y: sy, vx: vx, vy: vy,
+      life: 0, maxLife: 1,
+      decay: 0.015 + Math.random() * 0.025,
+      width: Math.random() * 1.5 + 0.5,
+      length: Math.random() * 60 + 30
+    });
   }
-  .section h2 {
-    font-size: 1.8rem;
+
+  let lastTime = performance.now();
+
+  function animate(now) {
+    const dt = now - lastTime;
+    lastTime = now;
+
+    // ----- Scroll-based parallax (gives the "moving forward" feel) -----
+    const scrollY = window.scrollY;
+    const maxScroll = Math.max(1, document.body.scrollHeight - window.innerHeight);
+    const scrollProgress = Math.min(1, scrollY / maxScroll); // 0 ... 1
+
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // ----- Update stars -----
+    stars.forEach(s => {
+      // Base drift + scroll-driven parallax (both faster)
+      const speedFactor = 0.8 + scrollProgress * 1.2; // 0.8 when at top, up to 2.0 at bottom
+      s.z -= s.baseSpeed * 12 * speedFactor;
+      if (s.z <= 0) {
+        s.z = 2000 + Math.random() * 500;
+        s.x = Math.random() * canvas.width;
+        s.y = Math.random() * canvas.height;
+      }
+
+      const scale = 2000 / (2000 - s.z);
+      const screenX = s.x + (s.x - canvas.width / 2) * (scrollProgress * 0.8);
+      const screenY = s.y + (s.y - canvas.height / 2) * (scrollProgress * 0.8);
+
+      // Only draw if the star is within the viewport (plus a small margin)
+      if (screenX > -1 && screenX < canvas.width + 1 &&
+          screenY > -1 && screenY < canvas.height + 1) {
+        const depthFactor = 1 - (s.z / 2000); // 0 (far) -> 1 (near)
+
+        // Brightness range: very dim far away -> bright up close
+        const baseBrightness = 0.15 + depthFactor * 0.85; // 0.15 ... 1.0
+
+        // Twinkle = sine wave with per-star phase offset
+        const twinkle = Math.sin(now * 0.004 + s.phase) * 0.15;
+        let brightness = baseBrightness + twinkle;
+        if (brightness < 0.05) brightness = 0.05; // floor so we never lose a star completely
+        if (brightness > 1) brightness = 1;
+
+        const r = s.radius * (0.6 + depthFactor * 0.8); // nearer = very slightly larger, still small
+        ctx.fillStyle = `rgba(255,255,255,${brightness})`;
+        ctx.beginPath();
+        ctx.arc(screenX, screenY, r, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    });
+
+    // ----- Update shooting stars -----
+    if (now - lastSpawn > spawnInterval) {
+      for (let i = 0; i < spawnsPerTick; i++) spawnShooting();
+      lastSpawn = now;
+    }
+    shootingStars.forEach((star, i) => {
+      star.x += star.vx;
+      star.y += star.vy;
+      star.life += star.decay;
+
+      if (star.life >= 1 ||
+          star.x < -100 || star.x > canvas.width + 100 ||
+          star.y < -100 || star.y > canvas.height + 100) {
+        shootingStars.splice(i, 1);
+        return;
+      }
+
+      const opacity = 1 - star.life;
+      if (opacity <= 0) return;
+
+      ctx.beginPath();
+      ctx.moveTo(star.x, star.y);
+      ctx.lineTo(star.x - star.vx * 4, star.y - star.vy * 4);
+      ctx.strokeStyle = `rgba(255,255,255,${opacity * 0.8})`;
+      ctx.lineWidth = star.width;
+      ctx.stroke();
+    });
+
+    requestAnimationFrame(animate);
   }
-  .personal-content,
-  .personal-content:nth-child(even) {
-    flex-direction: column;
-    text-align: center;
-  }
-  .image-placeholder {
-    width: 140px;
-    height: 140px;
-    margin: 0 auto 1rem;
-  }
-  .personal-text {
-    text-align: center;
-  }
-}
-@media (max-width: 480px) {
-  .section {
-    padding: 3rem 1rem 1.5rem;
-  }
-  #hero h1 {
-    font-size: 2.2rem;
-  }
-  #hero .title {
-    font-size: 1.2rem;
-  }
-  .section h2 {
-    font-size: 1.5rem;
-  }
-  .personal-content {
-    padding: 1rem;
-  }
-  .image-placeholder {
-    width: 110px;
-    height: 110px;
-  }
-  .contact-info {
-    grid-template-columns: 1fr;
-  }
+  requestAnimationFrame(animate);
 }
