@@ -29,10 +29,11 @@ function initStarfield() {
 
   // ---------- Shooting stars ----------
   const shootingStars = [];
-  const maxShooting = 5;                     // allow more simultaneous shooting stars
+  const maxShooting = 14;                    // many more simultaneous shooting stars
   let lastSpawn = 0;
-  const spawnInterval = 500;                 // ms – much more frequent
-  const spawnChance = 0.8;                   // higher chance each interval
+  const spawnInterval = 150;                 // ms – much more frequent
+  const spawnChance = 0.95;                  // almost always spawns each interval
+  const spawnsPerTick = 2;                   // try spawning more than one at a time
 
   function spawnShooting() {
     if (shootingStars.length >= maxShooting) return;
@@ -114,7 +115,7 @@ function initStarfield() {
 
     // ----- Update shooting stars -----
     if (now - lastSpawn > spawnInterval) {
-      spawnShooting();
+      for (let i = 0; i < spawnsPerTick; i++) spawnShooting();
       lastSpawn = now;
     }
     shootingStars.forEach((star, i) => {
